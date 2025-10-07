@@ -1,0 +1,168 @@
+/* Auth Pages (Login & Register) Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--black);
+  background: var(--white);
+}
+
+/* Navigation */
+.header {
+  width: 100%;
+  background: var(--white);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navigation {
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-list.active {
+  display: block;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--black);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--green);
+}
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+}
+
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 50px 20px;
+}
+
+.auth-box {
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.auth-box h2 {
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Login button */
+.auth-box.login .auth-btn {
+  background: #0f976a; /* green */
+}
+
+.auth-box.login .auth-btn:hover {
+  background: #0d7a58;
+}
+
+/* Register button */
+.auth-box.register .auth-btn {
+  background: #77056a; /* purple */
+}
+
+.auth-box.register .auth-btn:hover {
+  background: #5e044f;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.auth-box p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.auth-box a {
+  text-decoration: none;
+}
+
+.auth-box a:hover {
+  text-decoration: underline;
+}
+
+/* Login link color */
+.auth-box.login a {
+  color: #0f976a;
+}
+
+/* Register link color */
+.auth-box.register a {
+  color: #77056a;
+}
+
+/* Responsive */
+@media screen and (max-width: 500px) {
+  .auth-box {
+    padding: 30px 20px;
+  }
+}
