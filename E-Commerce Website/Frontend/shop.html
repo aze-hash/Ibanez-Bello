@@ -433,93 +433,112 @@
   </section>
 
   <script>
-    // --- Add to Cart ---
-    const cartButtons = document.querySelectorAll('.add-cart');
-    cartButtons.forEach(btn => {
-      btn.addEventListener('click', e => {
-        const productCard = e.target.closest('.product-card');
-        const name = productCard.querySelector('h3').textContent;
-        const price = productCard.querySelector('p').textContent;
-        const img = productCard.querySelector('img').src;
+  // --- Add to Cart ---
+  const cartButtons = document.querySelectorAll('.add-cart');
+  cartButtons.forEach(btn => {
+    btn.addEventListener('click', e => {
+      const productCard = e.target.closest('.product-card');
+      const name = productCard.querySelector('h3').textContent;
+      const price = productCard.querySelector('.price') 
+                    ? productCard.querySelector('.price').textContent 
+                    : productCard.querySelectorAll('p')[1].textContent; // fallback if class missing
+      const image = productCard.querySelector('img').src;
 
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.push({ name, price, img });
-        localStorage.setItem('cart', JSON.stringify(cart));
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-        alert(`${name} added to cart!`);
-      });
-    });
-
-    // --- Buy Now ---
-    document.querySelectorAll('.buy-now').forEach(btn => {
-      btn.addEventListener('click', e => {
-        const productCard = e.target.closest('.product-card');
-        const name = productCard.querySelector('h3').textContent;
-        alert(`Proceeding to checkout for: ${name}`);
-      });
-    });
-
-    // --- Search Filter ---
-    document.getElementById('searchInput').addEventListener('input', function() {
-      const term = this.value.toLowerCase();
-      document.querySelectorAll('.product-card').forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        card.style.display = title.includes(term) ? 'block' : 'none';
-      });
-    });
-
-    // --- Category Filter ---
-    const catButtons = document.querySelectorAll('.cat-btn');
-    catButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        catButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const category = btn.dataset.category;
-        document.querySelectorAll('.product-card').forEach(card => {
-          if (category === 'all' || card.dataset.category === category) {
-            card.style.display = 'block';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // --- Favorites ---
-    const favoriteIcons = document.querySelectorAll('.favorite-icon i');
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-
-    favoriteIcons.forEach(icon => {
-      const card = icon.closest('.product-card');
-      const name = card.querySelector('h3').textContent;
-
-      // Mark if already favorited
-      if (favorites.some(f => f.name === name)) {
-        icon.classList.replace('bx-heart', 'bxs-heart');
-        icon.style.color = 'red';
+      // Check if already in cart
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
+      } else {
+        cart.push({ name, price, image, quantity: 1 });
       }
 
-      icon.addEventListener('click', () => {
-        const price = card.querySelector('p').textContent;
-        const img = card.querySelector('img').src;
-        const existing = favorites.find(f => f.name === name);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${name} added to cart!`);
+    });
+  });
 
-        if (existing) {
-          favorites = favorites.filter(f => f.name !== name);
-          icon.classList.replace('bxs-heart', 'bx-heart');
-          icon.style.color = '';
-          alert(`${name} removed from favorites.`);
+  // --- Buy Now ---
+  document.querySelectorAll('.buy-now').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const productCard = e.target.closest('.product-card');
+      const name = productCard.querySelector('h3').textContent;
+      const price = productCard.querySelector('.price') 
+                    ? productCard.querySelector('.price').textContent 
+                    : productCard.querySelectorAll('p')[1].textContent;
+      const image = productCard.querySelector('img').src;
+
+      // Save single item to cart and redirect to checkout
+      localStorage.setItem('cart', JSON.stringify([{ name, price, image, quantity: 1 }]));
+      alert(`Proceeding to checkout for: ${name}`);
+      window.location.href = 'cart.html';
+    });
+  });
+
+  // --- Search Filter ---
+  document.getElementById('searchInput').addEventListener('input', function() {
+    const term = this.value.toLowerCase();
+    document.querySelectorAll('.product-card').forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      card.style.display = title.includes(term) ? 'block' : 'none';
+    });
+  });
+
+  // --- Category Filter ---
+  const catButtons = document.querySelectorAll('.cat-btn');
+  catButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      catButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const category = btn.dataset.category;
+      document.querySelectorAll('.product-card').forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
         } else {
-          favorites.push({ name, price, img });
-          icon.classList.replace('bx-heart', 'bxs-heart');
-          icon.style.color = 'red';
-          alert(`${name} added to favorites!`);
+          card.style.display = 'none';
         }
-
-        localStorage.setItem('favorites', JSON.stringify(favorites));
       });
     });
-  </script>
+  });
+
+  // --- Favorites ---
+  const favoriteIcons = document.querySelectorAll('.favorite-icon i');
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+  favoriteIcons.forEach(icon => {
+    const card = icon.closest('.product-card');
+    const name = card.querySelector('h3').textContent;
+
+    if (favorites.some(f => f.name === name)) {
+      icon.classList.replace('bx-heart', 'bxs-heart');
+      icon.style.color = 'red';
+    }
+
+    icon.addEventListener('click', () => {
+      const price = card.querySelector('.price') 
+                    ? card.querySelector('.price').textContent 
+                    : card.querySelectorAll('p')[1].textContent;
+      const image = card.querySelector('img').src;
+      const existing = favorites.find(f => f.name === name);
+
+      if (existing) {
+        favorites = favorites.filter(f => f.name !== name);
+        icon.classList.replace('bxs-heart', 'bx-heart');
+        icon.style.color = '';
+        alert(`${name} removed from favorites.`);
+      } else {
+        favorites.push({ name, price, image });
+        icon.classList.replace('bx-heart', 'bxs-heart');
+        icon.style.color = 'red';
+        alert(`${name} added to favorites!`);
+      }
+
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    });
+  });
+</script>
+
 </body>
 </html>
