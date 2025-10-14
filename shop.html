@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="shop.css" />
+  <title>Shop Dashboard - ShopLife</title>
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="shop-header">
+    <div class="nav container d-flex">
+      <a href="#" class="logo"><h1>ShopLife</h1></a>
+
+      <ul class="shop-nav d-flex">
+        <li><a href="#" class="nav-link"><i class='bx bx-heart'></i> Favorites</a></li>
+        <li><a href="#" class="nav-link"><i class='bx bx-cart'></i> Cart</a></li>
+        <li><a href="#" class="nav-link"><i class='bx bx-user'></i> Profile</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Shop Content -->
+  <section class="products container">
+    <h2>Available Products</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Product 1">
+        <h3>Apple iPhone 14</h3>
+        <p>₱45,000</p>
+        <button class="btn">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Product 2">
+        <h3>Samsung Galaxy S23</h3>
+        <p>₱42,000</p>
+        <button class="btn">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200" alt="Product 3">
+        <h3>AirPods Pro</h3>
+        <p>₱12,500</p>
+        <button class="btn">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const cartButtons = document.querySelectorAll('.btn');
+    cartButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        alert('Item added to cart!');
+      });
+    });
+  </script>
+</body>
+</html>

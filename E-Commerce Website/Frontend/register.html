@@ -66,10 +66,22 @@
   </section>
 
   <script>
-    const hamburger = document.getElementById('hamburger-icon');
-    hamburger.addEventListener('click', function () {
-      document.querySelector('.nav-list').classList.toggle('active');
-    });
-  </script>
+  const hamburger = document.getElementById('hamburger-icon');
+  hamburger.addEventListener('click', function () {
+    document.querySelector('.nav-list').classList.toggle('active');
+  });
+
+  // Redirect after successful registration
+  const registerForm = document.querySelector('form');
+  registerForm.addEventListener('submit', function (e) {
+    e.preventDefault(); // prevent form from reloading the page
+    alert('Registration successful! Redirecting to login page...');
+    // Redirect to login page after a short delay
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 1500); // 1.5 second delay for user to see the message
+  });
+</script>
+
 </body>
 </html>

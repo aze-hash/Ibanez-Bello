@@ -56,10 +56,29 @@
   </section>
 
   <script>
-    const hamburger = document.getElementById('hamburger-icon');
-    hamburger.addEventListener('click', function () {
-      document.querySelector('.nav-list').classList.toggle('active');
-    });
-  </script>
+  const hamburger = document.getElementById('hamburger-icon');
+  hamburger.addEventListener('click', function () {
+    document.querySelector('.nav-list').classList.toggle('active');
+  });
+
+  // Redirect after login
+  const loginForm = document.querySelector('form');
+  loginForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    // Simple validation (can connect to backend later)
+    if (email && password) {
+      alert('Login successful! Redirecting to Shop Dashboard...');
+      setTimeout(() => {
+        window.location.href = 'shop.html'; // redirect to dashboard
+      }, 1000);
+    } else {
+      alert('Please enter your email and password.');
+    }
+  });
+</script>
+
 </body>
 </html>
