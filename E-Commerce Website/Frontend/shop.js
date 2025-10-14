@@ -1,4 +1,6 @@
-// ===== Review Popup Logic with Inputable Reviews & Delete =====
+// ======== SHOP.JS ========
+
+// ----- DOM Elements -----
 const modal = document.getElementById('reviewModal');
 const modalImg = document.getElementById('modalImg');
 const modalTitle = document.getElementById('modalTitle');
@@ -7,11 +9,21 @@ const closeModal = document.getElementById('closeModal');
 const reviewText = document.getElementById('reviewText');
 const submitReview = document.getElementById('submitReview');
 const stars = document.querySelectorAll('#starRatingContainer span');
+const searchInput = document.getElementById('searchInput');
+const categoryBtns = document.querySelectorAll('.cat-btn');
 
+// ----- Data -----
 let reviewsData = JSON.parse(localStorage.getItem('reviews')) || {};
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 let selectedRating = 5;
 
-// ===== Functions =====
+// ----- Utility -----
+function getPrice(card) {
+  const priceEl = card.querySelector(".price");
+  return priceEl ? priceEl.textContent.trim() : card.querySelectorAll("p")[1].textContent.trim();
+}
+
+// ----- Reviews -----
 function updateStars(rating) {
   stars.forEach(star => {
     star.classList.toggle('filled', parseInt(star.dataset.value) <= rating);
@@ -21,13 +33,12 @@ function updateStars(rating) {
 function renderReviews(productName) {
   const reviews = reviewsData[productName] || [];
   modalReviews.innerHTML = reviews.length
-    ? reviews.map((r, index) => `
+    ? reviews.map((r, idx) => `
         <p>${'⭐'.repeat(r.rating)} - ${r.comment}
-          <button class="delete-review" data-index="${index}">&times;</button>
+          <button class="delete-review" data-index="${idx}">&times;</button>
         </p>`).join('')
     : `<p>No reviews yet.</p>`;
 
-  // Add delete functionality
   document.querySelectorAll('.delete-review').forEach(btn => {
     btn.addEventListener('click', () => {
       const idx = btn.dataset.index;
@@ -38,9 +49,7 @@ function renderReviews(productName) {
   });
 }
 
-// ===== Event Listeners =====
-
-// Open modal on product image click
+// ----- Open Modal on Product Click -----
 document.querySelectorAll('.product-card img').forEach(img => {
   img.addEventListener('click', e => {
     const card = e.target.closest('.product-card');
@@ -59,11 +68,11 @@ document.querySelectorAll('.product-card img').forEach(img => {
   });
 });
 
-// Close modal
+// ----- Close Modal -----
 closeModal.addEventListener('click', () => modal.style.display = 'none');
-window.addEventListener('click', e => { if(e.target === modal) modal.style.display = 'none'; });
+window.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
 
-// Clickable stars
+// ----- Star Rating -----
 stars.forEach(star => {
   star.addEventListener('click', () => {
     selectedRating = parseInt(star.dataset.value);
@@ -71,7 +80,7 @@ stars.forEach(star => {
   });
 });
 
-// Submit review
+// ----- Submit Review -----
 submitReview.addEventListener('click', () => {
   const name = modalTitle.textContent;
   const comment = reviewText.value.trim();
@@ -81,22 +90,20 @@ submitReview.addEventListener('click', () => {
   reviewsData[name].push({ rating: selectedRating, comment });
 
   localStorage.setItem('reviews', JSON.stringify(reviewsData));
-
   renderReviews(name);
 
   reviewText.value = "";
   selectedRating = 5;
   updateStars(selectedRating);
-
   alert("Review submitted!");
 });
 
-// ===== Add to Cart =====
+// ----- Add to Cart -----
 document.querySelectorAll('.add-cart').forEach(btn => {
   btn.addEventListener('click', e => {
     const card = e.target.closest('.product-card');
     const name = card.querySelector('h3').textContent;
-    const price = card.querySelector('.price')?.textContent || card.querySelectorAll('p')[1].textContent;
+    const price = getPrice(card);
     const image = card.querySelector('img').src;
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -110,12 +117,12 @@ document.querySelectorAll('.add-cart').forEach(btn => {
   });
 });
 
-// ===== Buy Now =====
+// ----- Buy Now -----
 document.querySelectorAll('.buy-now').forEach(btn => {
   btn.addEventListener('click', e => {
     const card = e.target.closest('.product-card');
     const name = card.querySelector('h3').textContent;
-    const price = card.querySelector('.price')?.textContent || card.querySelectorAll('p')[1].textContent;
+    const price = getPrice(card);
     const image = card.querySelector('img').src;
 
     localStorage.setItem('cart', JSON.stringify([{ name, price, image, quantity: 1 }]));
@@ -124,29 +131,34 @@ document.querySelectorAll('.buy-now').forEach(btn => {
   });
 });
 
-// ===== Search Filter =====
-document.getElementById('searchInput').addEventListener('input', function() {
-  const term = this.value.toLowerCase();
-  document.querySelectorAll('.product-card').forEach(card => {
-    const title = card.querySelector('h3').textContent.toLowerCase();
-    card.style.display = title.includes(term) ? 'block' : 'none';
+// ----- Search + Category Filter -----
+function filterProducts() {
+  const term = searchInput.value.toLowerCase().trim();
+  const activeCategory = document.querySelector(".cat-btn.active")?.dataset.category || "all";
+
+  document.querySelectorAll(".product-card").forEach(card => {
+    const name = card.querySelector("h3").textContent.toLowerCase();
+    const desc = card.querySelector(".desc").textContent.toLowerCase();
+    const category = card.dataset.category;
+
+    const matchesSearch = name.includes(term) || desc.includes(term);
+    const matchesCategory = activeCategory === "all" || category === activeCategory;
+
+    card.style.display = matchesSearch && matchesCategory ? "block" : "none";
+  });
+}
+
+searchInput.addEventListener("input", filterProducts);
+
+categoryBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    categoryBtns.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    filterProducts();
   });
 });
 
-// ===== Category Filter =====
-document.querySelectorAll('.cat-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const category = btn.dataset.category;
-    document.querySelectorAll('.product-card').forEach(card => {
-      card.style.display = (category === 'all' || card.dataset.category === category) ? 'block' : 'none';
-    });
-  });
-});
-
-// ===== Favorites =====
-let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+// ----- Favorites -----
 document.querySelectorAll('.favorite-icon i').forEach(icon => {
   const card = icon.closest('.product-card');
   const name = card.querySelector('h3').textContent;
@@ -157,7 +169,7 @@ document.querySelectorAll('.favorite-icon i').forEach(icon => {
   }
 
   icon.addEventListener('click', () => {
-    const price = card.querySelector('.price')?.textContent || card.querySelectorAll('p')[1].textContent;
+    const price = getPrice(card);
     const image = card.querySelector('img').src;
     const existing = favorites.find(f => f.name === name);
 

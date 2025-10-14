@@ -6,11 +6,13 @@
   --white: #fff;
   --black: #222;
   --green: #0f976a;
-  --purple: #000000;
+  --purple: #c0c0c0;
+  --dark: #000000;
   --grey1: #f9f9f9;
   --grey2: #f0f0f0;
+  --light-green: #18f7a9;
+  --dark-green: rgb(3, 129, 70);
 }
-
 /* === Reset === */
 * {
   margin: 0;
@@ -24,15 +26,13 @@ body {
   background: var(--white);
 }
 
-/* === Navigation Bar === */
+/* ===== Main Shop Header ===== */
 .shop-header {
   width: 100%;
-  background: var(--white);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  background: var(--green);
+  color: var(--white);
+  padding: 15px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .nav.container {
@@ -47,72 +47,75 @@ body {
 .logo h1 {
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--green);
+  color: var(--white);
+}
+
+.shop-nav {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.shop-nav a {
+  text-decoration: none;
+  color: var(--white);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: 0.3s;
+}
+
+.shop-nav a:hover {
+  opacity: 0.85;
+}
+
+/* ===== Top Controls: Search + Category ===== */
+.top-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 20px auto;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 /* Search Bar */
 .search-bar {
-  flex: 1;
-  margin: 0 20rem;
-  position: center;
+  flex: 3;
+  position: relative;
 }
 
 .search-bar input {
   width: 100%;
-  padding: 10px 15px;
+  padding: 10px 40px 10px 15px;
   border-radius: 25px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   font-size: 1rem;
-  padding-right: 40px;
 }
 
 .search-bar i {
   position: absolute;
-  right: 15px;
-  top: 10px;
+  right: 20px;
+  top: 39%;
+  transform: translateY(-50%);
   font-size: 1.3rem;
   color: var(--green);
   cursor: pointer;
 }
 
-/* Nav Links */
-.shop-nav {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.shop-nav a {
-  text-decoration: none;
-  color: var(--black);
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: color 0.3s ease;
-}
-
-.shop-nav a:hover {
-  color: var(--purple);
-}
-
-.shop-nav i {
-  font-size: 1.3rem;
-}
-
-/* === Category Bar === */
+/* Category Bar */
 .category-bar {
+  flex: 3;
   background: var(--white);
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   overflow-x: auto;
   white-space: nowrap;
-  padding: 15px 20px;
-  margin: 25px auto;
-  width: 90%;
-  border-radius: 40px;
+  padding: 10px 15px;
+  border-radius: 50px;
   display: flex;
-  gap: 20px;
+  gap: 15px;
   scrollbar-width: thin;
 }
 
@@ -128,19 +131,18 @@ body {
 .category-bar button {
   background: var(--grey1);
   border: 1px solid #ddd;
-  border-radius: 50px; /* Capsule shape */
-  padding: 10px 25px;
-  font-size: 0.95rem;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-size: 1rem;
   font-weight: 500;
-  color: var(--black);
   cursor: pointer;
-  transition: all 0.3s ease;
   white-space: nowrap;
+  transition: all 0.3s ease;
 }
 
 .category-bar button:hover {
   background: var(--purple);
-  color: var(--white);
+  color: var(--dark-green);
   border-color: var(--purple);
   transform: translateY(-2px);
 }
@@ -152,7 +154,7 @@ body {
   box-shadow: 0 4px 10px rgba(15, 151, 106, 0.25);
 }
 
-/* === Products Section === */
+/* ===== Products Section ===== */
 .products {
   width: 90%;
   margin: 40px auto;
@@ -216,11 +218,10 @@ body {
 .product-card p {
   font-size: 1rem;
   font-weight: 500;
-  color: var(--purple);
+  color: var(--dark);
   margin-bottom: 10px;
 }
 
-/* Product Description */
 .product-card .desc {
   font-size: 0.9rem;
   color: #666;
@@ -258,35 +259,7 @@ body {
   background: #5e044f;
 }
 
-/* === Responsive === */
-@media (max-width: 768px) {
-  .nav.container {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .search-bar {
-    margin: 1rem 0;
-    width: 100%;
-  }
-
-  .shop-nav {
-    flex-direction: column;
-    background: var(--white);
-    width: 100%;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    padding: 1rem 0;
-  }
-
-  .category-bar {
-    padding: 10px;
-  }
-
-  .product-card img {
-    height: 180px;
-  }
-}
-/* ====== Modal Popup Styling ====== */
+/* ===== Modal Popup ===== */
 .modal {
   display: none;
   position: fixed;
@@ -336,61 +309,12 @@ body {
   color: red;
 }
 
-/* Review section style */
+/* ===== Reviews Section ===== */
 .reviews {
   text-align: left;
   margin-top: 10px;
 }
-.reviews p {
-  background: #f8f8f8;
-  padding: 8px;
-  border-radius: 10px;
-  margin-bottom: 6px;
-}
-.add-review {
-  margin-top: 15px;
-  text-align: left;
-}
-.add-review h4 {
-  margin-bottom: 8px;
-}
-.add-review select, .add-review textarea {
-  width: 100%;
-  margin-bottom: 8px;
-  padding: 6px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-.add-review textarea {
-  resize: vertical;
-  height: 60px;
-}
-.add-review button {
-  background-color: #0f976a;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.add-review button:hover {
-  background-color: #0c7454;
-}
-.star-rating {
-  display: flex;
-  gap: 5px;
-  font-size: 24px;
-  cursor: pointer;
-  user-select: none;
-}
-.star-rating span {
-  transition: color 0.2s;
-  color: #ccc;
-}
-.star-rating span.filled {
-  color: gold;
-}
+
 .reviews p {
   position: relative;
   background: #f8f8f8;
@@ -412,3 +336,73 @@ body {
   font-size: 16px;
 }
 
+.add-review {
+  margin-top: 15px;
+  text-align: left;
+}
+
+.add-review h4 {
+  margin-bottom: 8px;
+}
+
+.add-review select,
+.add-review textarea {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.add-review textarea {
+  resize: vertical;
+  height: 60px;
+}
+
+.add-review button {
+  background-color: var(--green);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.add-review button:hover {
+  background-color: #0c7454;
+}
+
+.star-rating {
+  display: flex;
+  gap: 5px;
+  font-size: 24px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.star-rating span {
+  transition: color 0.2s;
+  color: #ccc;
+}
+
+.star-rating span.filled {
+  color: gold;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .top-controls {
+    flex-direction: column;
+  }
+
+  .search-bar,
+  .category-bar {
+    flex: 1 1 100%;
+    margin: 10px 0;
+  }
+
+  .product-card img {
+    height: 180px;
+  }
+}

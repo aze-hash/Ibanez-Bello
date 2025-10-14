@@ -11,33 +11,36 @@
   <!-- Header -->
   <header class="shop-header">
     <div class="nav container d-flex">
-      <a href="#" class="logo"><h1>ShopLife</h1></a>
+      <div class="logo"><h1>ShopLife</h1></div>
       <ul class="shop-nav d-flex">
         <li><a href="favorites.html" class="nav-link"><i class='bx bx-heart'></i> Favorites</a></li>
         <li><a href="cart.html" class="nav-link"><i class='bx bx-cart'></i> Cart</a></li>
-        <li><a href="#" class="nav-link"><i class='bx bx-user'></i> Profile</a></li>
+        <li><a href="profile.html" class="nav-link"><i class='bx bx-user'></i> Profile</a></li>
       </ul>
     </div>
   </header>
 
   <!-- Search & Categories -->
-  <section class="search-categories container">
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search products..." />
-      <button id="searchBtn"><i class='bx bx-search'></i></button>
-    </div>
+<section class="top-controls">
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search products..." />
+    <button id="searchBtn"><i class='bx bx-search'></i></button>
+  </div>
 
-    <div class="category-slider">
-      <button class="cat-btn active" data-category="all">All</button>
-      <button class="cat-btn" data-category="skincare">Skincare</button>
-      <button class="cat-btn" data-category="makeup">Makeup</button>
-      <button class="cat-btn" data-category="fashion">Fashion</button>
-      <button class="cat-btn" data-category="accessories">Accessories</button>
-      <button class="cat-btn" data-category="gadgets">Gadgets</button>
-      <button class="cat-btn" data-category="shoes">Shoes</button>
-      <button class="cat-btn" data-category="wellness">Wellness</button>
-    </div>
-  </section>
+  <!-- Category Bar -->
+  <div class="category-bar">
+    <button class="cat-btn active" data-category="all">All</button>
+    <button class="cat-btn" data-category="skincare">Skincare</button>
+    <button class="cat-btn" data-category="makeup">Makeup</button>
+    <button class="cat-btn" data-category="fashion">Fashion</button>
+    <button class="cat-btn" data-category="accessories">Accessories</button>
+    <button class="cat-btn" data-category="gadgets">Gadgets</button>
+    <button class="cat-btn" data-category="shoes">Shoes</button>
+    <button class="cat-btn" data-category="wellness">Wellness</button>
+  </div>
+</section>
+
 
   <!-- Products -->
   <section class="products container">

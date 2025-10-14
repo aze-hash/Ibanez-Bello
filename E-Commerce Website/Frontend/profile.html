@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile - ShopLife</title>
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="shop.css" />
+  <link rel="stylesheet" href="profile.css" />
+  
+</head>
+<body>
+  <!-- Header -->
+  <header class="shop-header">
+    <div class="nav container d-flex">
+      <div class="logo"><h1>ShopLife</h1></div>
+      <ul class="shop-nav d-flex">
+        <li><a href="shop.html"><i class='bx bx-store'></i> Shop</a></li>
+        <li><a href="favorites.html" class="nav-link"><i class='bx bx-heart'></i> Favorites</a></li>
+        <li><a href="cart.html" class="nav-link"><i class='bx bx-cart'></i> Cart</a></li>
+        <li><a href="profile.html" class="nav-link active"><i class='bx bx-user'></i> Profile</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Profile Section -->
+  <section class="profile container">
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-img">
+          <img src="./Images/user.png" alt="User Profile Picture" />
+        </div>
+        <h2 id="username">Jane Doe</h2>
+        <p id="userEmail">janedoe@email.com</p>
+      </div>
+
+      <div class="profile-actions">
+        <button class="btn edit-profile"><i class='bx bx-edit'></i> Edit Profile</button>
+        <button class="btn logout" onclick="location.href='index.html'"><i class='bx bx-log-out'></i> Logout</button>
+      </div>
+
+      <div class="profile-info">
+        <h3>Account Details</h3>
+        <div class="info-item">
+          <span class="label">Full Name:</span>
+          <span id="fullName">Jane Doe</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Email:</span>
+          <span id="email">janedoe@email.com</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Phone:</span>
+          <span id="phone">+63 912 345 6789</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Address:</span>
+          <span id="address">123 Main Street, Lucena City</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Edit Profile Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h3>Edit Profile</h3>
+      <input type="text" id="editName" placeholder="Full Name" />
+      <input type="email" id="editEmail" placeholder="Email" />
+      <input type="text" id="editPhone" placeholder="Phone" />
+      <input type="text" id="editAddress" placeholder="Address" />
+      <button class="btn" id="saveChanges">Save Changes</button>
+    </div>
+  </div>
+
+  <footer class="shop-footer">
+    <p>&copy; 2025 ShopLife. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Modal functionality
+    const editBtn = document.querySelector('.edit-profile');
+    const modal = document.getElementById('editModal');
+    const closeBtn = document.getElementById('closeModal');
+    const saveBtn = document.getElementById('saveChanges');
+
+    editBtn.addEventListener('click', () => {
+      // Pre-fill current info
+      document.getElementById('editName').value = document.getElementById('fullName').textContent;
+      document.getElementById('editEmail').value = document.getElementById('email').textContent;
+      document.getElementById('editPhone').value = document.getElementById('phone').textContent;
+      document.getElementById('editAddress').value = document.getElementById('address').textContent;
+
+      modal.style.display = 'flex';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Save changes
+    saveBtn.addEventListener('click', () => {
+      document.getElementById('fullName').textContent = document.getElementById('editName').value;
+      document.getElementById('username').textContent = document.getElementById('editName').value;
+      document.getElementById('email').textContent = document.getElementById('editEmail').value;
+      document.getElementById('userEmail').textContent = document.getElementById('editEmail').value;
+      document.getElementById('phone').textContent = document.getElementById('editPhone').value;
+      document.getElementById('address').textContent = document.getElementById('editAddress').value;
+      modal.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
