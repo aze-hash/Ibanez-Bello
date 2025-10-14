@@ -1,7 +1,7 @@
-/* Import Fonts */
+/* === Import Fonts === */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 
-/* Color Variables (same theme) */
+/* === Color Variables === */
 :root {
   --white: #fff;
   --black: #222;
@@ -11,7 +11,7 @@
   --grey2: #f0f0f0;
 }
 
-/* Reset */
+/* === Reset === */
 * {
   margin: 0;
   padding: 0;
@@ -41,6 +41,7 @@ body {
   align-items: center;
   width: 90%;
   margin: auto;
+  flex-wrap: wrap;
 }
 
 .logo h1 {
@@ -49,6 +50,32 @@ body {
   color: var(--green);
 }
 
+/* Search Bar */
+.search-bar {
+  flex: 1;
+  margin: 0 20rem;
+  position: center;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  padding-right: 40px;
+}
+
+.search-bar i {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 1.3rem;
+  color: var(--green);
+  cursor: pointer;
+}
+
+/* Nav Links */
 .shop-nav {
   list-style: none;
   display: flex;
@@ -71,7 +98,58 @@ body {
 }
 
 .shop-nav i {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+}
+
+/* === Category Slider === */
+.category-bar {
+  background: var(--white);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 15px 20px;
+  margin: 25px auto;
+  width: 90%;
+  border-radius: 40px;
+  display: flex;
+  gap: 20px;
+  scrollbar-width: thin;
+}
+
+.category-bar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.category-bar::-webkit-scrollbar-thumb {
+  background: var(--green);
+  border-radius: 3px;
+}
+
+.category-bar button {
+  background: var(--grey1);
+  border: 1px solid #ddd;
+  border-radius: 50px; /* Capsule shape */
+  padding: 10px 25px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--black);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.category-bar button:hover {
+  background: var(--purple);
+  color: var(--white);
+  border-color: var(--purple);
+  transform: translateY(-2px);
+}
+
+.category-bar button.active {
+  background: var(--green);
+  color: var(--white);
+  border-color: var(--green);
+  box-shadow: 0 4px 10px rgba(15, 151, 106, 0.25);
 }
 
 /* === Products Section === */
@@ -143,6 +221,12 @@ body {
 }
 
 /* Buttons */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
 .btn {
   background: var(--green);
   color: var(--white);
@@ -159,32 +243,69 @@ body {
   transform: scale(1.05);
 }
 
-/* === Responsive Design === */
+.btn.fav {
+  background: var(--purple);
+}
+
+.btn.fav:hover {
+  background: #5e044f;
+}
+
+/* === Cart Section (Optional Modal / Sidebar) === */
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 10px 0;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.checkout-btn {
+  margin-top: 15px;
+  background-color: var(--green);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background-color: #0c7a56;
+}
+
+/* === Responsive === */
 @media (max-width: 768px) {
-  .shop-nav {
+  .nav.container {
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .search-bar {
+    margin: 1rem 0;
+    width: 100%;
+  }
+
+  .shop-nav {
+    flex-direction: column;
     background: var(--white);
-    position: absolute;
-    top: 70px;
-    right: 0;
-    padding: 1rem;
-    width: 200px;
+    width: 100%;
     box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    display: none;
+    padding: 1rem 0;
   }
 
-  .shop-nav.active {
-    display: flex;
-  }
-
-  .nav.container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .logo h1 {
-    font-size: 1.5rem;
+  .category-bar {
+    padding: 10px;
   }
 
   .product-card img {

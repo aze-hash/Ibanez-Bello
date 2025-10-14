@@ -3,228 +3,422 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Dashboard - ShopLife</title>
   <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="shop.css" />
-  <title>Shop Dashboard - ShopLife</title>
 </head>
 <body>
-  <!-- Header / Navigation -->
+  <!-- Header -->
   <header class="shop-header">
     <div class="nav container d-flex">
       <a href="#" class="logo"><h1>ShopLife</h1></a>
-
       <ul class="shop-nav d-flex">
         <li><a href="#" class="nav-link"><i class='bx bx-heart'></i> Favorites</a></li>
-        <li><a href="#" class="nav-link"><i class='bx bx-cart'></i> Cart</a></li>
+        <li><a href="cart.html" class="nav-link"><i class='bx bx-cart'></i> Cart</a></li>
         <li><a href="#" class="nav-link"><i class='bx bx-user'></i> Profile</a></li>
       </ul>
     </div>
   </header>
 
-  <!-- Shop Content -->
+  <!-- Search & Categories -->
+  <section class="search-categories container">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search products..." />
+      <button id="searchBtn"><i class='bx bx-search'></i></button>
+    </div>
+
+    <div class="category-slider">
+      <button class="cat-btn active" data-category="all">All</button>
+      <button class="cat-btn" data-category="skincare">Skincare</button>
+      <button class="cat-btn" data-category="makeup">Makeup</button>
+      <button class="cat-btn" data-category="fashion">Fashion</button>
+      <button class="cat-btn" data-category="accessories">Accessories</button>
+      <button class="cat-btn" data-category="gadgets">Gadgets</button>
+      <button class="cat-btn" data-category="shoes">Shoes</button>
+      <button class="cat-btn" data-category="wellness">Wellness</button>
+    </div>
+  </section>
+
+  <!-- Products -->
   <section class="products container">
     <h2>Available Products</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <img src="./Images/skincare.jpg" alt="Product 1">
+    <div class="product-grid" id="productGrid">
+
+      <!-- Start Products -->
+      <div class="product-card" data-category="skincare">
+        <img src="./Images/skincare.jpg" alt="Skincare Set">
         <h3>Skincare Set</h3>
         <p>₱1,299</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/soap.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="skincare">
+        <img src="./Images/soap.jpg" alt="Organic Soap Bar">
         <h3>Organic Soap Bar</h3>
         <p>₱199</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/lotion.jpg" alt="Product 3">
+
+      <div class="product-card" data-category="skincare">
+        <img src="./Images/lotion.jpg" alt="Lotion">
         <h3>Moisturizing Lotion</h3>
         <p>₱750</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/lipstick.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="makeup">
+        <img src="./Images/lipstick.jpg" alt="Lipstick">
         <h3>Matte Lipstick</h3>
         <p>₱299</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/brush.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="makeup">
+        <img src="./Images/brush.jpg" alt="Makeup Brush Set">
         <h3>Makeup Brush Set</h3>
         <p>₱1,200</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/cleanser.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="skincare">
+        <img src="./Images/cleanser.jpg" alt="Cleanser">
         <h3>Facial Cleanser</h3>
         <p>₱399</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/toner.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="skincare">
+        <img src="./Images/toner.jpg" alt="Toner">
         <h3>Glow and Glam Toner</h3>
         <p>₱449</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/sunscreen.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="skincare">
+        <img src="./Images/sunscreen.jpg" alt="Sunscreen">
         <h3>Sun Protection Cream</h3>
         <p>₱599</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/mask.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="skincare">
+        <img src="./Images/mask.jpg" alt="Rose Clay Mask">
         <h3>Rose Clay Mask</h3>
         <p>₱299</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-       <div class="product-card">
-        <img src="./Images/deo.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="wellness">
+        <img src="./Images/deo.jpg" alt="Deodorant">
         <h3>Deodorant</h3>
         <p>₱149</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-       <div class="product-card">
-        <img src="./Images/menperfume.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="fashion">
+        <img src="./Images/menperfume.jpg" alt="Men's Perfume">
         <h3>Men's Perfume</h3>
         <p>₱7,225</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-       <div class="product-card">
-        <img src="./Images/womenperfume.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="fashion">
+        <img src="./Images/womenperfume.jpg" alt="Women's Perfume">
         <h3>Women's Perfume</h3>
         <p>₱8,499</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-       <div class="product-card">
-        <img src="./Images/vitamin.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="wellness">
+        <img src="./Images/vitamin.jpg" alt="Vitamins">
         <h3>VITAFORCE Probiotics Boost</h3>
         <p>₱499</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-       <div class="product-card">
-        <img src="./Images/humid.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="gadgets">
+        <img src="./Images/humid.jpg" alt="Humidifier">
         <h3>Cool Mist Humidifier</h3>
         <p>₱449</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-       <div class="product-card">
-        <img src="./Images/candle.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="fashion">
+        <img src="./Images/candle.jpg" alt="Scented Candles">
         <h3>Scented Candles</h3>
         <p>₱150</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-       <div class="product-card">
-        <img src="./Images/tshirt.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="fashion">
+        <img src="./Images/tshirt.jpg" alt="T-shirt">
         <h3>Graphic T-Shirt</h3>
         <p>₱289</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-       <div class="product-card">
-        <img src="./Images/necklace.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="accessories">
+        <img src="./Images/necklace.jpg" alt="Necklace">
         <h3>Elegant Pink Floral Butterfly Necklace</h3>
         <p>₱299</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-       <div class="product-card">
-        <img src="./Images/bracelet.jpg" alt="Product 2">
-        <h3>Pandora bracelet</h3>
+
+      <div class="product-card" data-category="accessories">
+        <img src="./Images/bracelet.jpg" alt="Bracelet">
+        <h3>Pandora Bracelet</h3>
         <p>₱3,800</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/tote.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="fashion">
+        <img src="./Images/tote.jpg" alt="Tote Bag">
         <h3>Tote Bag</h3>
         <p>₱320</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/watch.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="gadgets">
+        <img src="./Images/watch.jpg" alt="SmartWatch">
         <h3>SmartWatch Activity Pedometer</h3>
         <p>₱3,500</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/case.jpg" alt="Product 2">
-        <h3>Iphone Case</h3>
+
+      <div class="product-card" data-category="gadgets">
+        <img src="./Images/case.jpg" alt="iPhone Case">
+        <h3>iPhone Case</h3>
         <p>₱199</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/mini.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="gadgets">
+        <img src="./Images/mini.jpg" alt="Mini Bluetooth Speaker">
         <h3>Mini Bluetooth Speaker</h3>
         <p>₱400</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/earpod.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="gadgets">
+        <img src="./Images/earpod.jpg" alt="Earbuds">
         <h3>Earbud with Case</h3>
         <p>₱239</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/power.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="gadgets">
+        <img src="./Images/power.jpg" alt="Power Bank">
         <h3>Power Bank</h3>
         <p>₱399</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/nike.jpg" alt="Product 2">
-        <h3>Low cut Sneaker Shoes</h3>
+
+      <div class="product-card" data-category="shoes">
+        <img src="./Images/nike.jpg" alt="Sneakers">
+        <h3>Low Cut Sneaker Shoes</h3>
         <p>₱1,200</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/heels.jpg" alt="Product 2">
-        <h3>AREZZO New Pointed Mid Heels Sandals</h3>
+
+      <div class="product-card" data-category="shoes">
+        <img src="./Images/heels.jpg" alt="Heels">
+        <h3>AREZZO Mid Heels Sandals</h3>
         <p>₱780</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/blackshoe.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="shoes">
+        <img src="./Images/blackshoe.jpg" alt="Leather Shoes">
         <h3>Vintage Formal Black Leather Shoes</h3>
         <p>₱650</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/slippers.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="shoes">
+        <img src="./Images/slippers.jpg" alt="Slippers">
         <h3>ARIANNA Soft and Warm Slippers</h3>
         <p>₱220</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/crocs.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="shoes">
+        <img src="./Images/crocs.jpg" alt="Crocs">
         <h3>Crocs Classic Clogs</h3>
         <p>₱199</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/blackshoes.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="shoes">
+        <img src="./Images/blackshoes.jpg" alt="Black Shoes">
         <h3>Women Black School Glossy Shoes</h3>
         <p>₱297</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/ear.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="accessories">
+        <img src="./Images/ear.jpg" alt="Earrings">
         <h3>Fashion Cherry Ribbon Earrings</h3>
         <p>₱89</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
-      <div class="product-card">
-        <img src="./Images/ring.jpg" alt="Product 2">
+
+      <div class="product-card" data-category="accessories">
+        <img src="./Images/ring.jpg" alt="Ring">
         <h3>GLOSSY New Ring</h3>
         <p>₱4,599</p>
-        <button class="btn">Add to Cart</button>
+        <div class="btn-group">
+          <button class="btn add-cart">Add to Cart</button>
+          <button class="btn buy-now">Buy Now</button>
+        </div>
       </div>
+      <!-- End Products -->
     </div>
   </section>
 
   <script>
-    const cartButtons = document.querySelectorAll('.btn');
+    // --- Add to Cart functionality ---
+    const cartButtons = document.querySelectorAll('.add-cart');
     cartButtons.forEach(btn => {
+      btn.addEventListener('click', e => {
+        const productCard = e.target.closest('.product-card');
+        const name = productCard.querySelector('h3').textContent;
+        const price = productCard.querySelector('p').textContent;
+        const img = productCard.querySelector('img').src;
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({ name, price, img });
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        alert(`${name} added to cart!`);
+      });
+    });
+
+    // --- Buy Now button ---
+    document.querySelectorAll('.buy-now').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const productCard = e.target.closest('.product-card');
+        const name = productCard.querySelector('h3').textContent;
+        alert(`Proceeding to checkout for: ${name}`);
+      });
+    });
+
+    // --- Search filter ---
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const term = this.value.toLowerCase();
+      document.querySelectorAll('.product-card').forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        card.style.display = title.includes(term) ? 'block' : 'none';
+      });
+    });
+
+    // --- Category filter ---
+    const catButtons = document.querySelectorAll('.cat-btn');
+    catButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        alert('Item added to cart!');
+        catButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const category = btn.dataset.category;
+        document.querySelectorAll('.product-card').forEach(card => {
+          if (category === 'all' || card.dataset.category === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
       });
     });
   </script>
