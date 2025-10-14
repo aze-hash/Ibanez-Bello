@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favorites - ShopLife</title>
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="favorites.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="nav container">
+      <div class="logo"><h1>ShopLife</h1></div>
+      <ul class="shop-nav">
+        <li><a href="shop.html"><i class='bx bx-store'></i> Shop</a></li>
+        <li><a href="cart.html"><i class='bx bx-cart'></i> Cart</a></li>
+        <li><a href="#"><i class='bx bx-user'></i> Profile</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Favorites -->
+  <section class="favorites-section container">
+    <h2>Your Favorite Products ❤️</h2>
+    <div class="favorites-grid" id="favoritesGrid"></div>
+    <p class="empty-message" id="emptyMsg">You have no favorites yet.</p>
+  </section>
+
+  <script>
+    // --- Load Favorites from localStorage ---
+    const favoritesGrid = document.getElementById('favoritesGrid');
+    const emptyMsg = document.getElementById('emptyMsg');
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    function displayFavorites() {
+      favoritesGrid.innerHTML = '';
+
+      if (favorites.length === 0) {
+        emptyMsg.style.display = 'block';
+        return;
+      } else {
+        emptyMsg.style.display = 'none';
+      }
+
+      favorites.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.classList.add('favorite-card');
+        card.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p>${item.price}</p>
+          <div class="btn-group">
+            <button class="btn add-cart">Add to Cart</button>
+            <button class="btn remove-btn">Remove</button>
+          </div>
+        `;
+        favoritesGrid.appendChild(card);
+
+        // Add to Cart
+        card.querySelector('.add-cart').addEventListener('click', () => {
+          let cart = JSON.parse(localStorage.getItem('cart')) || [];
+          cart.push(item);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          alert(`${item.name} added to cart!`);
+        });
+
+        // Remove from Favorites
+        card.querySelector('.remove-btn').addEventListener('click', () => {
+          favorites.splice(index, 1);
+          localStorage.setItem('favorites', JSON.stringify(favorites));
+          displayFavorites();
+          alert(`${item.name} removed from favorites.`);
+        });
+      });
+    }
+
+    displayFavorites();
+  </script>
+</body>
+</html>
