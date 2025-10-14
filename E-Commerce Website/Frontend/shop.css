@@ -6,7 +6,7 @@
   --white: #fff;
   --black: #222;
   --green: #0f976a;
-  --purple: #77056a;
+  --purple: #000000;
   --grey1: #f9f9f9;
   --grey2: #f0f0f0;
 }
@@ -219,6 +219,13 @@ body {
   color: var(--purple);
   margin-bottom: 10px;
 }
+/* Product Description */
+.product-card .desc {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 5px 0 10px;
+}
+
 
 /* Buttons */
 .btn-group {

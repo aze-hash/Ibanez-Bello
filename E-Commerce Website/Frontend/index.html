@@ -136,52 +136,9 @@
       </div>
     </div>
   </section>
-
-
-
-  <!-- Scripts -->
+<!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
-  <script>
-    new Glide('#glide_1', {
-      type: 'carousel',
-      startAt: 0,
-      perView: 1,
-      focusAt: 'center',
-      autoplay: 2000,
-      gap: 0,
-      hoverpause: true,
-    }).mount();
-
-    const hamburger = document.getElementById('hamburger-icon');
-    hamburger.addEventListener('click', function () {
-      document.querySelector('.nav-list').classList.toggle('active');
-    });
-  </script>
-  <script>
-  // Smooth scroll already handled by CSS
-  const sections = document.querySelectorAll("section");
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  window.addEventListener("scroll", () => {
-    let current = "";
-
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop - 80; // adjust if header is fixed
-      const sectionHeight = section.clientHeight;
-
-      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-        current = section.getAttribute("id");
-      }
-    });
-
-    navLinks.forEach((link) => {
-      link.classList.remove("active");
-      if (link.getAttribute("href") === "#" + current) {
-        link.classList.add("active");
-      }
-    });
-  });
-</script>
+  <script src="index.js"></script>
 
 </body>
 </html>
