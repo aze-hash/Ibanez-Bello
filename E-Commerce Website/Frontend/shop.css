@@ -178,6 +178,39 @@ body {
   margin: 10px auto 0;
   border-radius: 3px;
 }
+.modal-cart-status {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  .modal-cart-icon {
+    margin-right: 6px;
+  }
+
+  .modal-cart-count {
+    background: #ff4d4d;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 50%;
+    font-size: 14px;
+  }
+.cart-icon {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #ff3d3d;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
 
 /* Product Grid */
 .product-grid {
@@ -406,3 +439,75 @@ body {
     height: 180px;
   }
 }
+/* Make the background cover whole screen */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  overflow-y: auto; /* allow page scrolling if needed */
+}
+
+/* Make the modal box bigger */
+.modal-content {
+  width: 80%;               /* wider */
+  max-width: 900px;         /* maximum width */
+  max-height: 85vh;         /* prevent overflow outside screen */
+  margin: 60px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+
+  overflow-y: auto;         /* ENABLE SCROLLING INSIDE */
+  overflow-x: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+/* Make the product image a bit bigger but responsive */
+.modal-content img {
+  width: 200px;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+/* Improve review section spacing */
+.reviews {
+  max-height: 300px;
+  overflow-y: auto;         /* Review list scrolls */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.product-card[data-category="skincare"] {
+  background-color: #f5c1c1; /* light pink */
+}
+
+.product-card[data-category="makeup"] {
+  background-color: #f7ebbe; /* light yellow */
+}
+
+.product-card[data-category="fashion"] {
+  background-color: #b8e9f0; /* light blue */
+}
+
+.product-card[data-category="gadgets"] {
+  background-color: #bbbbbb; /* light gray */
+}
+
+.product-card[data-category="wellness"] {
+  background-color: #c2e7c2; /* light green */
+}
+
+.product-card[data-category="shoes"] {
+  background-color: #9ea1ad; /* light rose */
+}
+
+.product-card[data-category="accessories"] {
+  background-color: #cbb0cf; /* light purple */
+}
+

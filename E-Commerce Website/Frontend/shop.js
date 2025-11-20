@@ -11,11 +11,22 @@ const submitReview = document.getElementById('submitReview');
 const stars = document.querySelectorAll('#starRatingContainer span');
 const searchInput = document.getElementById('searchInput');
 const categoryBtns = document.querySelectorAll('.cat-btn');
+const cartCountEl = document.getElementById("cartCount");
 
-// ----- Data -----
-let reviewsData = JSON.parse(localStorage.getItem('reviews')) || {};
-let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-let selectedRating = 5;
+// Modal buttons
+const modalAddToCart = document.createElement("button");
+modalAddToCart.textContent = "Add to Cart";
+modalAddToCart.className = "btn";
+const modalBuyNow = document.createElement("button");
+modalBuyNow.textContent = "Buy Now";
+modalBuyNow.className = "btn";
+
+// Append buttons to modal dynamically
+const addReviewDiv = document.querySelector(".add-review");
+addReviewDiv.appendChild(modalAddToCart);
+addReviewDiv.appendChild(modalBuyNow);
+
+let currentProduct = null; // Track product for modal actions
 
 // ----- Utility -----
 function getPrice(card) {
@@ -24,6 +35,11 @@ function getPrice(card) {
 }
 
 // ----- Reviews -----
+let reviewsData = JSON.parse(localStorage.getItem('reviews')) || {};
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let selectedRating = 5;
+
 function updateStars(rating) {
   stars.forEach(star => {
     star.classList.toggle('filled', parseInt(star.dataset.value) <= rating);
@@ -54,16 +70,18 @@ document.querySelectorAll('.product-card img').forEach(img => {
   img.addEventListener('click', e => {
     const card = e.target.closest('.product-card');
     const name = card.querySelector('h3').textContent;
+    const desc = card.querySelector(".desc")?.textContent || "";
     const imageSrc = card.querySelector('img').src;
+    const price = getPrice(card);
+
+    // Track current product for modal actions
+    currentProduct = { name, desc, image: imageSrc, price };
 
     modalImg.src = imageSrc;
     modalTitle.textContent = name;
-
     renderReviews(name);
-
     selectedRating = 5;
     updateStars(selectedRating);
-
     modal.style.display = 'flex';
   });
 });
@@ -98,37 +116,30 @@ submitReview.addEventListener('click', () => {
   alert("Review submitted!");
 });
 
-// ----- Add to Cart -----
-document.querySelectorAll('.add-cart').forEach(btn => {
-  btn.addEventListener('click', e => {
-    const card = e.target.closest('.product-card');
-    const name = card.querySelector('h3').textContent;
-    const price = getPrice(card);
-    const image = card.querySelector('img').src;
+// ----- Cart and Buy Now inside Modal -----
+function updateCartCount() {
+  const count = cart.reduce((total, item) => total + item.quantity, 0);
+  cartCountEl.textContent = count;
+}
 
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const existingItem = cart.find(item => item.name === name);
+modalAddToCart.addEventListener("click", () => {
+  if (!currentProduct) return;
 
-    if (existingItem) existingItem.quantity = (existingItem.quantity || 1) + 1;
-    else cart.push({ name, price, image, quantity: 1 });
+  const existing = cart.find(item => item.name === currentProduct.name);
+  if (existing) existing.quantity++;
+  else cart.push({ ...currentProduct, quantity: 1 });
 
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${name} added to cart!`);
-  });
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  alert(`${currentProduct.name} added to cart!`);
 });
 
-// ----- Buy Now -----
-document.querySelectorAll('.buy-now').forEach(btn => {
-  btn.addEventListener('click', e => {
-    const card = e.target.closest('.product-card');
-    const name = card.querySelector('h3').textContent;
-    const price = getPrice(card);
-    const image = card.querySelector('img').src;
+modalBuyNow.addEventListener("click", () => {
+  if (!currentProduct) return;
 
-    localStorage.setItem('cart', JSON.stringify([{ name, price, image, quantity: 1 }]));
-    alert(`Proceeding to checkout for: ${name}`);
-    window.location.href = 'cart.html';
-  });
+  localStorage.setItem("cart", JSON.stringify([{ ...currentProduct, quantity: 1 }]));
+  alert(`Proceeding to checkout for: ${currentProduct.name}`);
+  window.location.href = 'cart.html';
 });
 
 // ----- Search + Category Filter -----
@@ -138,7 +149,7 @@ function filterProducts() {
 
   document.querySelectorAll(".product-card").forEach(card => {
     const name = card.querySelector("h3").textContent.toLowerCase();
-    const desc = card.querySelector(".desc").textContent.toLowerCase();
+    const desc = card.querySelector(".desc")?.textContent.toLowerCase() || "";
     const category = card.dataset.category;
 
     const matchesSearch = name.includes(term) || desc.includes(term);
@@ -149,7 +160,6 @@ function filterProducts() {
 }
 
 searchInput.addEventListener("input", filterProducts);
-
 categoryBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     categoryBtns.forEach(b => b.classList.remove("active"));
@@ -188,3 +198,6 @@ document.querySelectorAll('.favorite-icon i').forEach(icon => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   });
 });
+
+// Initialize cart count on load
+updateCartCount();
