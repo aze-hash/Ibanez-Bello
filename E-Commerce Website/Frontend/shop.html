@@ -321,11 +321,14 @@
   <div class="modal-content">
     <span id="closeModal" class="close-btn">&times;</span>
 
-    <!-- Cart Icon + Count -->
-    <div class="modal-cart-status">
-      <a href="cart.html" class="modal-cart-icon" style="text-decoration:none; cursor:pointer;">🛒</a>
-      <span id="modalCartCount" class="modal-cart-count">0</span>
-    </div>
+   <!-- Cart Icon + Count (SAME AS HEADER) -->
+<div class="modal-cart-status">
+  <a href="cart.html" class="nav-link cart-icon">
+    <i class='bx bx-cart'></i>
+    <span id="modalCartCount" class="cart-count">0</span>
+  </a>
+</div>
+
 
     <img id="modalImg" src="" alt="Product Image" />
     <h3 id="modalTitle"></h3>
@@ -355,6 +358,66 @@
 
   </div>
 </div>
+
+<!-- ================= CHECKOUT MODAL ================= -->
+<div id="checkoutModal" class="modal">
+  <div class="modal-content checkout-content">
+
+    <span id="closeCheckout" class="close-btn">&times;</span>
+    <h2>Checkout</h2>
+
+    <!-- Product Summary -->
+    <div class="checkout-section">
+      <h3>Order Summary</h3>
+      <p><strong>Product:</strong> <span id="checkoutProductName"></span></p>
+      <p><strong>Price:</strong> ₱<span id="checkoutProductPrice"></span></p>
+      <p><strong>Quantity:</strong> 
+        <input type="number" id="checkoutQty" min="1" value="1">
+      </p>
+    </div>
+
+    <!-- Address -->
+    <div class="checkout-section">
+      <h3>Delivery Address</h3>
+      <textarea id="checkoutAddress" placeholder="Enter your complete address..."></textarea>
+    </div>
+
+    <!-- Voucher -->
+    <div class="checkout-section">
+      <h3>Platform Voucher</h3>
+      <select id="checkoutVoucher">
+        <option value="0">No Voucher</option>
+        <option value="10">₱10 OFF</option>
+        <option value="20">₱20 OFF</option>
+        <option value="30">₱30 OFF</option>
+        <option value="50">₱50 OFF</option>
+      </select>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="checkout-section">
+      <h3>Payment Method</h3>
+      <select id="checkoutMethod">
+        <option value="cod">Cash on Delivery</option>
+        <option value="gcash">GCash</option>
+        <option value="card">Debit/Credit Card</option>
+      </select>
+    </div>
+
+    <!-- Payment Summary -->
+    <div class="checkout-section">
+      <h3>Payment Details</h3>
+      <p>Subtotal: ₱<span id="checkoutSubtotal"></span></p>
+      <p>Voucher Discount: -₱<span id="checkoutDiscount"></span></p>
+      <p><strong>Total: ₱<span id="checkoutTotal"></span></strong></p>
+    </div>
+
+    <!-- Checkout Button -->
+    <button id="confirmCheckout" class="btn checkout-btn">Proceed to Pay</button>
+
+  </div>
+</div>
+
 
 <script src="shop.js"></script>
 
