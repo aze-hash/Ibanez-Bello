@@ -17,7 +17,7 @@
         <li><a href="favorites.html" class="nav-link"><i class='bx bx-heart'></i> Favorites</a></li>
         <li>
   <a href="cart.html" class="nav-link cart-icon">
-    <i class='bx bx-cart'></i>
+    <i class='bx bx-cart'>Cart</i>
     <span id="cartCount" class="cart-count">0</span>
   </a>
 </li>
@@ -409,24 +409,25 @@
       <p>No reviews yet.</p>
     </div>
 
-    <!-- Add Review Form -->
-    <div class="add-review">
-      <h4>Add Your Review</h4>
-      <div class="star-rating" id="starRatingContainer">
-        <span data-value="1">☆</span>
-        <span data-value="2">☆</span>
-        <span data-value="3">☆</span>
-        <span data-value="4">☆</span>
-        <span data-value="5">☆</span>
-      </div>
-      <textarea id="reviewText" placeholder="Write your comment here..."></textarea>
-      <button id="submitReview" class="btn">Submit</button>
-    </div>
+ <!-- Add Review Form -->
+<div class="add-review">
+  <h4>Add Your Review</h4>
+  <div class="star-rating" id="starRatingContainer">
+    <span data-value="1">☆</span>
+    <span data-value="2">☆</span>
+    <span data-value="3">☆</span>
+    <span data-value="4">☆</span>
+    <span data-value="5">☆</span>
+  </div>
+  <textarea id="reviewText" placeholder="Write your comment here..."></textarea>
+  <button id="submitReview" class="submit-review-btn">Submit</button>
+</div>
 
-    <div class="btn-group modal-btns">
-      <button id="modalAddCart" class="btn add-cart">Add to Cart</button>
-      <button id="modalBuyNow" class="btn buy-now">Buy Now</button>
-    </div>
+<!-- Add to Cart / Buy Now Buttons -->
+<div class="modal-actions">
+  <button id="modalAddCart" class="add-cart">Add to Cart</button>
+  <button id="modalBuyNow" class="buy-now">Buy Now</button>
+</div>
 
   </div>
 </div>

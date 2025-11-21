@@ -199,12 +199,13 @@ body {
   }
 .cart-icon {
   position: relative;
+  margin-right: 30px;
 }
 
 .cart-count {
   position: absolute;
   top: -8px;
-  right: -10px;
+  right: -19px;
   background: #ff3d3d;
   color: #fff;
   font-size: 12px;
@@ -263,33 +264,12 @@ body {
 
 /* Buttons */
 .btn-group {
+  position: absolute;
+  bottom: 20px; /* distance from bottom of modal */
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
   gap: 8px;
-}
-
-.btn {
-  background: var(--green);
-  color: var(--white);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.btn:hover {
-  background: #0c7a56;
-  transform: scale(1.05);
-}
-
-.btn.fav {
-  background: var(--purple);
-}
-
-.btn.fav:hover {
-  background: #5e044f;
 }
 
 /* ===== Modal Popup ===== */
@@ -391,19 +371,49 @@ body {
 .add-review textarea {
   resize: vertical;
   height: 60px;
-}
-
-.add-review button {
+}/* ===== Submit Review Button ===== */
+.submit-review-btn {
+  display: block;                 /* own line */
+  margin: 10px 0 20px auto;       /* right-aligned */
+  padding: 10px 20px;
   background-color: var(--green);
-  color: white;
+  color: #fff;
   border: none;
-  padding: 8px 12px;
   border-radius: 8px;
+  font-weight: 500;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.add-review button:hover {
+.submit-review-btn:hover {
   background-color: #0c7454;
+  transform: scale(1.03);
+}
+
+/* ===== Add to Cart / Buy Now Buttons ===== */
+.modal-actions {
+  display: flex;                  /* inline row */
+  justify-content: center;        /* center horizontally */
+  gap: 20px;                      /* spacing between buttons */
+  margin-top: 20px;               /* spacing above */
+}
+
+.modal-actions .add-cart,
+.modal-actions .buy-now {
+  padding: 10px 20px;
+  background-color: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.modal-actions .add-cart:hover,
+.modal-actions .buy-now:hover {
+  background-color: #0c7a56;
+  transform: scale(1.05);
 }
 
 .star-rating {
