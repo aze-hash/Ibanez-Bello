@@ -1,45 +1,47 @@
-/* Fonts */
+/* === Fonts === */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 
-/* Color Variables */
+/* === Color Variables === */
 :root {
   --white: #fff;
   --black: #222;
   --green: #0f976a;
   --grey1: #f0f0f0;
   --grey2: #e9d7d3;
+  --purple: #77056a;
 }
 
-/* Basic Reset */
+/* === Basic Reset === */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 html {
   scroll-behavior: smooth;
 }
-
 
 body {
   font-family: 'Roboto', sans-serif;
   color: var(--black);
   background: var(--white);
 }
+
+/* === Sections === */
+section {
+  padding: 80px 20px;
+  scroll-margin-top: 80px; /* fixes sticky header offset */
+}
+
+/* === Header / Navigation === */
 .header {
-  position: sticky; /* keeps header visible while scrolling */
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
   background: var(--white);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  z-index: 9999; /* ensures clickable nav */
-}
-
-/* Navigation */
-.header {
-  width: 100%;
-  background: var(--white);
+  z-index: 9999;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -71,19 +73,18 @@ body {
   gap: 2rem;
 }
 
-.nav-list.active {
-  display: block;
-}
-
 .nav-link {
   text-decoration: none;
   color: var(--black);
   font-weight: 500;
-  transition: color 0.3s ease;
+  padding: 8px 15px;
+  transition: 0.3s;
 }
 
-.nav-link:hover {
-  color: var(--green);
+.nav-link:hover,
+.nav-link.active {
+  color: var(--purple);
+  font-weight: 600;
 }
 
 /* Hamburger */
@@ -93,7 +94,7 @@ body {
   cursor: pointer;
 }
 
-/* Hero Section */
+/* === Hero Section === */
 .hero {
   width: 100%;
   height: 100vh;
@@ -145,7 +146,7 @@ body {
   height: 750px;
 }
 
-/* Responsive */
+/* === Responsive === */
 @media (max-width: 768px) {
   .nav-list {
     display: none;
@@ -160,6 +161,10 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
   }
 
+  .nav-list.nav-active {
+    display: flex;
+  }
+
   .hamburger {
     display: block;
   }
@@ -171,11 +176,12 @@ body {
 
   .right img {
     margin-top: 2rem;
+    height: auto;
   }
 }
+
 /* === About Section === */
 .about {
-  padding: 80px 20px;
   background: #f9f9f9;
   text-align: center;
   border-top: 1px solid #eee;
@@ -204,7 +210,7 @@ body {
   display: inline-block;
   margin-top: 20px;
   padding: 12px 25px;
-  background: #77056a; /* same as your theme color */
+  background: var(--purple);
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
@@ -215,12 +221,28 @@ body {
 .about-btn:hover {
   background: #5b034f;
 }
+
+.about-credits {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #666;
+  opacity: 0.8;
+}
+
+.about-credits a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+.about-credits a:hover {
+  text-decoration: underline;
+}
+
 /* === Terms Section === */
 .terms {
-  padding: 80px 20px;
   background: #fff;
-  text-align: left;
   border-top: 1px solid #eee;
+  text-align: left;
 }
 
 .terms-content {
@@ -259,13 +281,13 @@ body {
 
 .terms ul li::before {
   content: "✔";
-  color: #77056a; /* theme color */
+  color: var(--purple);
   position: absolute;
   left: 0;
 }
 
 .terms a {
-  color: #77056a;
+  color: var(--purple);
   text-decoration: none;
   font-weight: 500;
 }
@@ -273,9 +295,9 @@ body {
 .terms a:hover {
   text-decoration: underline;
 }
+
 /* === Contact Section === */
 .contact {
-  padding: 80px 20px;
   background: #f9f9f9;
   border-top: 1px solid #eee;
   text-align: center;
@@ -310,48 +332,6 @@ body {
 }
 
 .contact-info i {
-  color: #77056a; /* theme color */
+  color: var(--purple);
   margin-right: 8px;
 }
-/* Default nav link */
-.nav-link {
-  color: #333;
-  text-decoration: none;
-  padding: 8px 15px;
-  transition: 0.3s;
-}
-
-/* Hover effect */
-.nav-link:hover {
-  color: #77056a; /* theme color */
-}
-
-/* Active link (when section is visible) */
-.nav-link.active {
-  color: #77056a; 
-  font-weight: 600;
-}
-.about-credits {
-  margin-top: 20px;
-  font-size: 12px;
-  color: #666;
-  opacity: 0.8;
-}
-
-.about-credits a {
-  color: #0f976a;
-  text-decoration: none;
-}
-
-.about-credits a:hover {
-  text-decoration: underline;
-}
-.nav-list {
-  display: flex;
-}
-
-.nav-list.nav-active {
-  display: block; /* or flex, depending on your mobile style */
-}
-
-

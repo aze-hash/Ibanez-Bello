@@ -157,7 +157,7 @@ modalAddToCart.addEventListener("click", () => {
   saveToStorage("cart", cart);
   updateCartCount();
 
-  alert(`${currentProduct.name} added to cart!`);
+  //alert(`${currentProduct.name} added to cart!`);
 });
 
 // ----- Buy Now -----
@@ -214,12 +214,12 @@ document.querySelectorAll(".favorite-icon i").forEach(icon => {
       favorites = favorites.filter(f => f.name !== name);
       icon.classList.replace("bxs-heart", "bx-heart");
       icon.style.color = "";
-      alert(`${name} removed from favorites.`);
+      //alert(`${name} removed from favorites.`);
     } else {
       favorites.push({ name, price, image });
       icon.classList.replace("bx-heart", "bxs-heart");
       icon.style.color = "red";
-      alert(`${name} added to favorites!`);
+      //alert(`${name} added to favorites!`);
     }
 
     saveToStorage("favorites", favorites);

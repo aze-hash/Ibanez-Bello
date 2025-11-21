@@ -14,7 +14,10 @@
       <div class="logo"><h1>ShopLife</h1></div>
       <ul class="shop-nav">
         <li><a href="shop.html"><i class='bx bx-store'></i> Home</a></li>
-        <li><a href="cart.html"><i class='bx bx-cart'></i> Cart</a></li>
+        <li><a href="cart.html" class="nav-link cart-icon">
+    <i class='bx bx-cart'></i>
+    <span id="cartCount" class="cart-count">0</span>
+  </a></li>
         <li><a href="profile.html"><i class='bx bx-user'></i> Profile</a></li>
       </ul>
     </div>
@@ -47,7 +50,7 @@
         const card = document.createElement('div');
         card.classList.add('favorite-card');
         card.innerHTML = `
-          <img src="${item.img}" alt="${item.name}">
+          <img src="${item.image}" alt="${item.name}">
           <h3>${item.name}</h3>
           <p>${item.price}</p>
           <div class="btn-group">
