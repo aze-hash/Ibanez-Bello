@@ -26,6 +26,15 @@ body {
   color: var(--black);
   background: var(--white);
 }
+.header {
+  position: sticky; /* keeps header visible while scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--white);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 9999; /* ensures clickable nav */
+}
 
 /* Navigation */
 .header {
@@ -321,6 +330,28 @@ body {
 .nav-link.active {
   color: #77056a; 
   font-weight: 600;
+}
+.about-credits {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #666;
+  opacity: 0.8;
+}
+
+.about-credits a {
+  color: #0f976a;
+  text-decoration: none;
+}
+
+.about-credits a:hover {
+  text-decoration: underline;
+}
+.nav-list {
+  display: flex;
+}
+
+.nav-list.nav-active {
+  display: block; /* or flex, depending on your mobile style */
 }
 
 
