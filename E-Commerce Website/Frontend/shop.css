@@ -291,7 +291,7 @@ body {
   max-width: 400px;
   border-radius: 20px;
   padding: 20px;
-  text-align: center;
+  text-align: left;
   box-shadow: 0 0 25px rgba(0,0,0,0.3);
   position: relative;
   animation: popIn 0.3s ease;
@@ -479,7 +479,7 @@ body {
 
 /* Make the product image a bit bigger but responsive */
 .modal-content img {
-  width: 200px;
+  width: 150px;
   display: block;
   margin: 0 auto 20px;
 }
@@ -520,53 +520,161 @@ body {
 .product-card[data-category="accessories"] {
   background-color: #cbb0cf; /* light purple */
 }
-/* Make Checkout Modal match Review Modal size */
+/* Modal Layout */
 .checkout-content {
-  width: 80%;               /* same width */
-  max-width: 900px;         /* same max width */
-  max-height: 85vh;         /* prevent overflow */
-  margin: 60px auto;
+  width: 450px;
+  max-width: 90%;
   background: #fff;
-  padding: 20px;
+  padding: 20px 25px;
   border-radius: 12px;
-  overflow-y: auto;         /* scrolling inside */
-  overflow-x: hidden;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
+.checkout-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
 .checkout-section {
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 8px;
-  background: #f7f7f7;
+  margin-bottom: 20px;
 }
 
-.checkout-section h3 {
-  margin-bottom: 8px;
+/* Inline labels and inputs for delivery, voucher, and payment */
+.checkout-section.inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkout-section.inline h3 {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+  min-width: 140px; /* fixed width for label column */
+}
+
+.checkout-section.inline textarea,
+.checkout-section.inline select,
+.checkout-section.inline input[type="number"] {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+.checkout-section.payment-details p {
+  display: flex;
+  justify-content: space-between; /* label left, amount right */
+  margin: 5px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.checkout-section.payment-details p .amount {
+  text-align: right;
+}
+
+.checkout-section.payment-details .total-row {
+  font-weight: 700;
   font-size: 16px;
 }
 
-#checkoutAddress {
-  width: 100%;
-  height: 70px;
+
+
+
+
+
+/* Product Summary Layout */
+.product-summary {
+  display: flex;
+  gap: 15px;
+  align-items: center;
 }
 
-#checkoutQty, 
-#checkoutVoucher, 
-#checkoutMethod {
+.checkout-product-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Quantity input */
+#checkoutQty {
+  width: 60px;
   padding: 5px;
-  margin-top: 5px;
-  width: 100%;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Payment Summary */
+.payment-summary p {
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Checkout Button */
+.checkout-footer {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .checkout-btn {
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   font-weight: 500;
   background: var(--green);
   color: #fff;
   font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
+.checkout-btn:hover {
+  background: #0c7a53;
+}
 
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+}
+.extra-description {
+  white-space: pre-line; /* preserves line breaks and spaces */
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+}
+.extra-description p {
+  margin-bottom: 1em;
+}
+.extra-description-section {
+  margin-top: 20px; /* space from reviews */
+}
+
+.extra-description-section h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.extra-description-section p {
+  white-space: pre-line; /* preserves line breaks in text */
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}

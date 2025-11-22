@@ -16,111 +16,90 @@
       <div class="logo"><h1>ShopLife</h1></div>
       <ul class="shop-nav d-flex">
         <li><a href="shop.html"><i class='bx bx-store'></i> Home</a></li>
-        <li><a href="favorites.html" class="nav-link"><i class='bx bx-heart'></i> Favorites</a></li>
-        <li><a href="account.html" class="nav-link"><i class='bx bx-user'></i> Account</a></li>
+        <li>
+          <a href="favorites.html" class="nav-link">
+            <i class='bx bx-heart'></i> Favorites
+            <span class="cart-count">0</span>
+          </a>
+        </li>
+        <li>
+          <a href="account.html" class="nav-link">
+            <i class='bx bx-user'></i> Account
+            <span class="cart-count">0</span>
+          </a>
+        </li>
       </ul>
     </div>
   </header>
+<!-- === Cart Section === -->
+<section class="cart container">
+  <h2>Your Shopping Cart</h2>
+  <div class="cart-items"></div>
+  <h3 id="total">Total: ₱0</h3>
+  <button class="btn checkout-btn">Proceed to Checkout</button>
+</section>
+<!-- ================= CHECKOUT MODAL ================= -->
+<div id="checkoutModal" class="modal">
+  <div class="modal-content checkout-content">
 
-  <!-- === Cart Section === -->
-  <section class="cart container">
-    <h2>Your Shopping Cart</h2>
-    <div class="cart-items"></div>
-    <h3 id="total">Total: ₱0</h3>
-    <button class="btn checkout-btn">Proceed to Checkout</button>
-  </section>
+    <span id="closeCheckout" class="close-btn">&times;</span>
+    <h2>Checkout</h2>
 
-  <script>
-    const cartContainer = document.querySelector('.cart-items');
-    const totalDisplay = document.getElementById('total');
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    <!-- Product Summary -->
+    <div class="checkout-section product-summary">
+      <img id="checkoutProductImg" src="" alt="Product Image" class="checkout-product-img">
+      <div class="product-info">
+        <p><strong>Product:</strong> <span id="checkoutProductName"></span></p>
+        <p><strong>Price:</strong> ₱<span id="checkoutProductPrice"></span></p>
+        <p><strong>Quantity:</strong>
+          <input type="number" id="checkoutQty" min="1" value="1">
+        </p>
+      </div>
+    </div>
 
-    // Ensure each item has a quantity
-    cart = cart.map(item => ({
-      ...item,
-      quantity: item.quantity || 1
-    }));
+    <!-- Delivery Address -->
+<div class="checkout-section inline">
+  <h3>Delivery Address</h3>
+  <textarea id="checkoutAddress" placeholder="Enter your complete address..."></textarea>
+</div>
 
-    function renderCart() {
-      cartContainer.innerHTML = '';
-      let total = 0;
+<!-- Platform Voucher -->
+<div class="checkout-section inline">
+  <h3>Platform Voucher</h3>
+  <select id="checkoutVoucher">
+    <option value="0">No Voucher</option>
+    <option value="10">₱10 OFF</option>
+    <option value="20">₱20 OFF</option>
+    <option value="30">₱30 OFF</option>
+    <option value="50">₱50 OFF</option>
+  </select>
+</div>
 
-      if (cart.length === 0) {
-        cartContainer.innerHTML = "<p class='empty-cart'>Your cart is empty.</p>";
-        totalDisplay.innerText = "Total: ₱0";
-        return;
-      }
+<!-- Payment Method -->
+<div class="checkout-section inline">
+  <h3>Payment Method</h3>
+  <select id="checkoutMethod">
+    <option value="cod">Cash on Delivery</option>
+    <option value="gcash">GCash</option>
+    <option value="card">Debit/Credit Card</option>
+  </select>
+</div>
+<div class="checkout-section payment-details">
+  <h3>Payment Details</h3>
+  <p><span class="label">Subtotal:</span> <span class="amount">₱<span id="checkoutSubtotal"></span></span></p>
+  <p><span class="label">Voucher Discount:</span> <span class="amount">-₱<span id="checkoutDiscount"></span></span></p>
+  <p class="total-row"><span class="label">Total:</span> <span class="amount">₱<span id="checkoutTotal"></span></span></p>
+</div>
 
-      cart.forEach((item, index) => {
-        const priceValue = parseFloat(item.price.replace(/[₱,]/g, '')) || 0;
-        const quantity = item.quantity || 1;
-        const subtotal = priceValue * quantity;
-        total += subtotal;
+    <!-- Checkout Button -->
+    <div class="checkout-footer">
+      <button id="confirmCheckout" class="btn checkout-btn">Place Order</button>
+    </div>
 
-        const div = document.createElement('div');
-        div.classList.add('cart-item');
-        div.innerHTML = `
-          <img src="${item.image}" alt="${item.name}">
-          <div class="cart-info">
-            <h4>${item.name}</h4>
-            <p class="price">Price: ₱${priceValue.toLocaleString()}</p>
-            
-            <div class="quantity-controls">
-              <button class="qty-btn decrease">−</button>
-              <span class="quantity">${quantity}</span>
-              <button class="qty-btn increase">+</button>
-            </div>
-            
-            <p class="subtotal">Subtotal: ₱${subtotal.toLocaleString()}</p>
-            <button class="remove-btn"><i class='bx bx-trash'></i> Remove</button>
-          </div>
-        `;
+  </div>
+</div>
 
-        // Decrease quantity
-        div.querySelector('.decrease').addEventListener('click', () => {
-          if (cart[index].quantity > 1) {
-            cart[index].quantity--;
-            saveCart();
-            renderCart();
-          }
-        });
 
-        // Increase quantity
-        div.querySelector('.increase').addEventListener('click', () => {
-          cart[index].quantity++;
-          saveCart();
-          renderCart();
-        });
-
-        // Remove item
-        div.querySelector('.remove-btn').addEventListener('click', () => {
-          cart.splice(index, 1);
-          saveCart();
-          renderCart();
-        });
-
-        cartContainer.appendChild(div);
-      });
-
-      totalDisplay.innerText = `Total: ₱${total.toLocaleString()}`;
-    }
-
-    function saveCart() {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
-
-    // Initial render
-    renderCart();
-
-    // Checkout button
-    document.querySelector('.checkout-btn').addEventListener('click', () => {
-      if (cart.length === 0) {
-        alert('Your cart is empty!');
-      } else {
-        alert('Proceeding to checkout...');
-        window.location.href = 'checkout.html';
-      }
-    });
-  </script>
+  <script src="cart.js"></script>
 </body>
 </html>
