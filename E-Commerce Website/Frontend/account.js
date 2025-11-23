@@ -123,4 +123,35 @@ function loadOrders() {
   window.addEventListener("click", e => { if (e.target === orderModal) orderModal.style.display = "none"; });
 }
 
-document.addEventListener("DOMContentLoaded", loadOrders);
+// ------------------ Cart Count ------------------
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  const cartCountElem = document.getElementById('cartCount');
+  cartCountElem.textContent = totalItems;
+  cartCountElem.style.display = totalItems > 0 ? 'inline-block' : 'none';
+}
+
+// ------------------ Add to Cart ------------------
+function updateCartCount() {
+  cart = JSON.parse(localStorage.getItem("cart")) || []; // refresh global cart
+
+  const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+
+  document.querySelectorAll(".cart-count").forEach(el => {
+    el.textContent = total;
+  });
+}
+
+// ------------------ Initialize ------------------
+document.addEventListener("DOMContentLoaded", () => {
+  loadOrders();
+  updateCartCount(); // update cart count on page load
+});
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('.shop-nav');
+
+navToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+});
+

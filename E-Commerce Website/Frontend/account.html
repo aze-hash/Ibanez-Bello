@@ -7,19 +7,20 @@
   <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="shop.css" />
   <link rel="stylesheet" href="account.css" />
-
 </head>
 <body>
   <!-- Header -->
   <header class="shop-header">
     <div class="nav container d-flex">
       <div class="logo"><h1>ShopLife</h1></div>
-      <ul class="shop-nav d-flex">
-        <li><a href="shop.html"><i class='bx bx-store'></i> Home</a></li>
-        <li><a href="favorites.html" class="nav-link"><i class='bx bx-heart'></i> Favorites</a></li>
-        <li><a href="cart.html" class="nav-link"><i class='bx bx-cart'></i> Cart</a></li>
-        <li><a href="profile.html" class="nav-link active"><i class='bx bx-user'></i> Account</a></li>
-      </ul>
+<i class='bx bx-menu nav-toggle'></i> <!-- Hamburger icon -->
+<ul class="shop-nav d-flex">
+  <li><a href="shop.html"><i class='bx bx-store'></i> Home</a></li>
+  <li><a href="favorites.html" class="nav-link"><i class='bx bx-heart'></i> Favorites</a></li>
+  <li><a href="cart.html" class="nav-link"><i class='bx bx-cart'></i> Cart <span id="cartCount" class="cart-count">0</span></a></li>
+  <li><a href="profile.html" class="nav-link active"><i class='bx bx-user'></i> Account</a></li>
+</ul>
+
     </div>
   </header>
 
@@ -56,6 +57,7 @@
         <button class="order-tab" data-tab="ship">To Ship</button>
         <button class="order-tab" data-tab="receive">To Receive</button>
         <button class="order-tab" data-tab="completed">Completed</button>
+        <button class="order-tab" data-tab="cancelled">Cancelled</button>
       </div>
 
       <div class="tab-content active" id="orders">
@@ -64,6 +66,7 @@
       <div class="tab-content" id="ship"><p>No items to ship.</p></div>
       <div class="tab-content" id="receive"><p>No items to receive.</p></div>
       <div class="tab-content" id="completed"><p>No completed orders yet.</p></div>
+      <div class="tab-content" id="cancelled"><p>No cancelled orders yet.</p></div>
     </div>
   </section>
 
@@ -88,7 +91,11 @@
       <p>Please select a reason for cancellation:</p>
       <div class="cancel-reasons">
         <label><input type="radio" name="cancelReason" value="No longer needed"> No longer needed</label>
+        <label><input type="radio" name="cancelReason" value="Ordered wrong item"> I ordered the wrong item</label>
         <label><input type="radio" name="cancelReason" value="Change delivery address"> I need to change the delivery address</label>
+        <label><input type="radio" name="cancelReason" value="Accidental order"> I placed the order by accident</label>
+        <label><input type="radio" name="cancelReason" value="Payment issues"> I had issues with payment</label>
+        <label><input type="radio" name="cancelReason" value="Voucher or discount issue"> My discount/voucher didn’t apply</label>
         <label><input type="radio" name="cancelReason" value="Other"> Other</label>
       </div>
       <input type="text" id="cancelOtherReason" placeholder="Specify reason" />
