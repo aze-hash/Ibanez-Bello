@@ -196,12 +196,34 @@
 
     // Add event listeners for cancel buttons
     const cancelButtons = ordersContainer.querySelectorAll(".cancel-order");
-    cancelButtons.forEach(btn => {
+    cancelButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const orderIndex = parseInt(btn.dataset.index);
-        orders.splice(orderIndex, 1); // remove from array
-        localStorage.setItem("orders", JSON.stringify(orders)); // save updated array
-        loadOrders(); // refresh the list
+
+        const reason = prompt(
+          "Please select a reason for cancellation:\n1. No longer needed\n2. I need to change the delivery address\n3. Other (please specify)"
+        );
+
+        if (reason) {
+          let reasonText = "";
+          if (reason === "1") {
+            reasonText = "No longer needed";
+          } else if (reason === "2") {
+            reasonText = "I need to change the delivery address";
+          } else {
+            reasonText = reason;
+          }
+
+          const confirmCancel = confirm(`Are you sure you want to cancel this order?\nReason: ${reasonText}`);
+
+          if (confirmCancel) {
+            orders[orderIndex].status = `Cancelled: ${reasonText}`; // Update status with reason
+            localStorage.setItem("orders", JSON.stringify(orders)); // Save updated array
+            loadOrders(); // Refresh the list
+          }
+        } else {
+          alert("Cancellation reason is required.");
+        }
       });
     });
   }
