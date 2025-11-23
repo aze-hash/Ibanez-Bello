@@ -19,8 +19,9 @@
 }
 
 html {
-  scroll-behavior: smooth;
-}
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px; /* adjust to your header height */
+    }
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -30,7 +31,7 @@ body {
 
 /* === Sections === */
 section {
-  padding: 80px 20px;
+  padding: 42px 20px;
   scroll-margin-top: 80px; /* fixes sticky header offset */
 }
 
@@ -40,18 +41,18 @@ section {
   top: 0;
   left: 0;
   width: 100%;
-  background: var(--white);
+  background: var(--green);
   z-index: 9999;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
 .navigation {
   width: 100%;
-  padding: 1rem 0;
+  padding: 1rem 35px;
 }
 
 .container {
-  width: 90%;
+  width: 100%;
   margin: auto;
 }
 
@@ -75,7 +76,7 @@ section {
 
 .nav-link {
   text-decoration: none;
-  color: var(--black);
+  color: var(--white);
   font-weight: 500;
   padding: 8px 15px;
   transition: 0.3s;
@@ -103,12 +104,18 @@ section {
   justify-content: center;
   background: var(--grey1);
 }
+.img1 {
+  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+}
+.img2 {
+  mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+}
 
 .center {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 85%;
   margin: auto;
 }
 
@@ -210,7 +217,7 @@ section {
   display: inline-block;
   margin-top: 20px;
   padding: 12px 25px;
-  background: var(--purple);
+  background: var(--green);
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
@@ -219,7 +226,7 @@ section {
 }
 
 .about-btn:hover {
-  background: #5b034f;
+  background: #025e3f;
 }
 
 .about-credits {
@@ -281,13 +288,13 @@ section {
 
 .terms ul li::before {
   content: "✔";
-  color: var(--purple);
+  color: var(--green);
   position: absolute;
   left: 0;
 }
 
 .terms a {
-  color: var(--purple);
+  color: var(--green);
   text-decoration: none;
   font-weight: 500;
 }
@@ -332,6 +339,16 @@ section {
 }
 
 .contact-info i {
-  color: var(--purple);
+  color: var(--green);
   margin-right: 8px;
+}
+.contact-disclaimer {
+  margin-top: 40px;
+  padding: 20px;
+  background: linear-gradient(90deg, #b0f3b6, #86c28b);
+  border-left: 6px solid var(--green);
+  border-radius: 12px;
+  font-size: 15px;
+  color: #6b5200;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }

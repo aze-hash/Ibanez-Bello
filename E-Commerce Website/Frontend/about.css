@@ -21,7 +21,7 @@
 
 
 .learn-more {
-  padding: 60px 20px;
+  padding: 2px 0px;
 }
 
 .learn-more-content {
@@ -72,8 +72,8 @@
 .disclaimer-box {
   margin-top: 40px;
   padding: 20px;
-  background: linear-gradient(90deg, #fff6d9, #fff0be);
-  border-left: 6px solid #ffbe3d;
+  background: linear-gradient(90deg,#b0f3b6, #86c28b);
+  border-left: 6px solid #0f976a;
   border-radius: 12px;
   font-size: 15px;
   color: #6b5200;
