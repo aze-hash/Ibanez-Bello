@@ -216,4 +216,25 @@ document.getElementById('confirmCheckout').addEventListener('click', () => {
   renderCart(); // Re-render the cart to reflect changes
 });
 
+function addItemToCartFromFavorites(item) {
+  const existingItem = cart.find(cartItem => cartItem.name === item.name);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({
+      name: item.name,
+      price: parseFloat(item.price) || 0, // Ensure price is parsed as a float
+      quantity: 1,
+      image: item.image
+    });
+  }
+
+  saveCart();
+  renderCart();
+}
+
+// Example usage: Call this function when adding an item from favorites
+// addItemToCartFromFavorites({ name: 'Sample Item', price: 100, image: 'sample.jpg' });
+
 renderCart();

@@ -15,7 +15,7 @@
       <ul class="shop-nav">
         <li><a href="shop.html"><i class='bx bx-store'></i> Home</a></li>
         <li><a href="cart.html" class="nav-link cart-icon">
-    <i class='bx bx-cart'></i>
+    <i class='bx bx-cart'>Cart</i>
     <span id="cartCount" class="cart-count">0</span>
   </a></li>
         <li><a href="account.html"><i class='bx bx-user'></i> Account</a></li>
@@ -54,29 +54,32 @@
           <h3>${item.name}</h3>
           <p>${item.price}</p>
           <div class="btn-group">
-            <button class="btn add-cart">Add to Cart</button>
             <button class="btn remove-btn">Remove</button>
           </div>
         `;
         favoritesGrid.appendChild(card);
-
-        // Add to Cart
-        card.querySelector('.add-cart').addEventListener('click', () => {
-          let cart = JSON.parse(localStorage.getItem('cart')) || [];
-          cart.push(item);
-          localStorage.setItem('cart', JSON.stringify(cart));
-          alert(`${item.name} added to cart!`);
-        });
 
         // Remove from Favorites
         card.querySelector('.remove-btn').addEventListener('click', () => {
           favorites.splice(index, 1);
           localStorage.setItem('favorites', JSON.stringify(favorites));
           displayFavorites();
-          alert(`${item.name} removed from favorites.`);
+          //alert(`${item.name} removed from favorites.`);
         });
       });
     }
+
+    // --- Update Cart Count ---
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartCount = document.getElementById('cartCount');
+      cartCount.textContent = cart.length;
+    }
+
+    // Call updateCartCount on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+    });
 
     displayFavorites();
   </script>

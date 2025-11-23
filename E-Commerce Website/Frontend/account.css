@@ -146,6 +146,7 @@ body {
     margin: 0;
   }
 }
+
 /* ===== Modal Styles ===== */
     .modal {
       display: none; /* hidden by default */
@@ -368,5 +369,67 @@ body {
   justify-content: flex-start;
   gap: 5px; /* space between label and value */
   margin: 12px 23px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile.container {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .profile-card {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .account-dashboard {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .account-sidebar,
+  .account-main {
+    width: 100%;
+  }
+
+  .order-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .order-details h4 {
+    font-size: 1rem;
+  }
+
+  .cancel-order {
+    align-self: center;
+    margin-top: 10px;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .order-summary {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .order-summary img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-info {
+    display: none;
+  }
 }
 
