@@ -158,25 +158,20 @@ submitReview.addEventListener("click", () => {
   renderReviews(product);
 });
 
-// ----- Add to Cart -----
 modalAddToCart.addEventListener("click", () => {
   if (!currentProduct) return;
 
-  const formattedPrice = "₱" + Number(currentProduct.price).toLocaleString();
-
-  const item = {
-    name: currentProduct.name,
-    price: formattedPrice,
-    image: currentProduct.image,
-    quantity: 1
-  };
-
-  let existing = cart.find(p => p.name === item.name);
+  const existing = cart.find(item => item.name === currentProduct.name);
 
   if (existing) {
     existing.quantity++;
   } else {
-    cart.push(item);
+    cart.push({
+      name: currentProduct.name,
+      image: currentProduct.image,
+      price: currentProduct.price,  // <-- MUST INCLUDE THIS
+      quantity: 1
+    });
   }
 
   saveToStorage("cart", cart);
@@ -214,7 +209,7 @@ function updateCheckoutPrices() {
   const total = Math.max(subtotal - discount, 0);
 
   checkoutSubtotal.textContent = subtotal.toLocaleString('en-PH', { minimumFractionDigits:2 });
-  checkoutDiscount.textContent = discount.toLocaleString('en-PH', { minimumFractionDigits:2 });
+  checkoutDiscount.textContent = discount.toLocaleString('en-PH', { style: 'decimal' }); // Removed PHP formatting
   checkoutTotal.textContent = total.toLocaleString('en-PH', { minimumFractionDigits:2 });
 }
 
@@ -223,15 +218,41 @@ checkoutVoucher.addEventListener("change", updateCheckoutPrices);
 
 // ----- Confirm Checkout -----
 confirmCheckout.addEventListener("click", () => {
-  if (checkoutAddress.value.trim() === "") {
-    return alert("Please enter your delivery address.");
+  const selectedCardType = checkoutMethod.value === "card" ? document.getElementById("cardType").value : null;
+  const phoneNumber = document.getElementById("checkoutPhone").value.trim();
+
+  if (!phoneNumber) {
+    alert("Please enter your phone number.");
+    return;
   }
 
+  if (checkoutAddress.value.trim() === "") {
+    alert("Please enter your delivery address.");
+    return;
+  }
+
+  if (selectedCardType) {
+    console.log("Selected Card Type:", selectedCardType);
+  }
+
+  console.log("Phone Number:", phoneNumber);
+  alert("Order placed successfully!");
+
+  // Proceed with placing the order
   let qty = parseInt(checkoutQty.value) || 1;
   placeOrder(currentProduct, qty);
-
   checkoutModal.style.display = "none";
   window.location.href = "account.html";
+});
+
+// Handle payment method change
+checkoutMethod.addEventListener("change", () => {
+  const cardTypeContainer = document.getElementById("cardTypeContainer");
+  if (checkoutMethod.value === "card") {
+    cardTypeContainer.style.display = "block";
+  } else {
+    cardTypeContainer.style.display = "none";
+  }
 });
 
 // ----- Search + Category Filter -----

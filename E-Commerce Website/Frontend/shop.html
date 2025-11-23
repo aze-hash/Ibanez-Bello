@@ -594,7 +594,7 @@ Elegant and sensual, this creation weaves rose, patchouli, and warm woods into a
 
 
 
-Add|ct (100 ml) – For Women
+Add|ct
 
 
 Intense and magnetic, this fragrance blends deep vanilla with tonka and jasmine. Bold, powerful, and unforgettable—made for women who love to stand out.
@@ -1783,6 +1783,12 @@ Product Ratings">
   <textarea id="checkoutAddress" placeholder="Enter your complete address..."></textarea>
 </div>
 
+<!-- Phone Number -->
+<div class="checkout-section inline">
+  <h3>Phone Number</h3>
+  <input type="tel" id="checkoutPhone" placeholder="Enter your phone number..." />
+</div>
+
 <!-- Platform Voucher -->
 <div class="checkout-section inline">
   <h3>Platform Voucher</h3>
@@ -1803,7 +1809,16 @@ Product Ratings">
     <option value="gcash">GCash</option>
     <option value="card">Debit/Credit Card</option>
   </select>
+  <div id="cardTypeContainer" style="display: none; margin-top: 10px;">
+    <h4>Card Type</h4>
+    <select id="cardType">
+      <option value="visa">Visa</option>
+      <option value="mastercard">MasterCard</option>
+      <option value="amex">American Express</option>
+    </select>
+  </div>
 </div>
+
 <div class="checkout-section payment-details">
   <h3>Payment Details</h3>
   <p><span class="label">Subtotal:</span> <span class="amount">₱<span id="checkoutSubtotal"></span></span></p>

@@ -303,11 +303,11 @@ body {
 }
 
 .modal-content img {
-  width: 150px;
-  height: 150px;
+  height: 213px;
   object-fit: cover;
   border-radius: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  display: block;
 }
 
 .close-btn {
@@ -477,12 +477,6 @@ body {
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
 
-/* Make the product image a bit bigger but responsive */
-.modal-content img {
-  width: 150px;
-  display: block;
-  margin: 0 auto 20px;
-}
 
 /* Improve review section spacing */
 .reviews {
@@ -580,11 +574,6 @@ body {
   font-weight: 700;
   font-size: 16px;
 }
-
-
-
-
-
 
 /* Product Summary Layout */
 .product-summary {

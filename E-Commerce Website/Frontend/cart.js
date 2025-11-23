@@ -42,6 +42,7 @@ function renderCart() {
     div.classList.add('cart-item');
     div.dataset.index = index;
     div.innerHTML = `
+      <input type="checkbox" class="item-checkbox" data-index="${index}" />
       <img src="${item.image}" alt="${item.name}">
       <div class="cart-info">
         <h4>${item.name}</h4>
@@ -52,7 +53,7 @@ function renderCart() {
           <button class="qty-btn increase">+</button>
         </div>
         <p class="subtotal">Subtotal: ${subtotal.toLocaleString('en-PH', { style:'currency', currency:'PHP' })}</p>
-        <button class="remove-btn"><i class='bx bx-trash'></i> Remove</button>
+        <button class="remove-btn"><i class='bx bx-trash'></i> </button>
       </div>
     `;
     cartContainer.appendChild(div);
@@ -64,6 +65,9 @@ function renderCart() {
 
 // Handle increase / decrease / remove
 cartContainer.addEventListener('click', e => {
+  // Ignore clicks on checkboxes
+  if (e.target.type === 'checkbox') return;
+
   const cartItem = e.target.closest('.cart-item');
   if (!cartItem) return;
   const index = Number(cartItem.dataset.index);
@@ -71,14 +75,43 @@ cartContainer.addEventListener('click', e => {
   if (e.target.classList.contains('increase')) {
     cart[index].quantity++;
   } else if (e.target.classList.contains('decrease')) {
-    if (cart[index].quantity > 1) cart[index].quantity--;
-    else cart.splice(index, 1);
+    if (cart[index].quantity > 1) {
+      cart[index].quantity--;
+    }
   } else if (e.target.closest('.remove-btn')) {
     cart.splice(index, 1);
   }
 
   saveCart();
   renderCart();
+});
+
+// Add event listener to highlight selected items
+cartContainer.addEventListener('change', e => {
+  if (e.target.classList.contains('item-checkbox')) {
+    const cartItem = e.target.closest('.cart-item');
+    if (e.target.checked) {
+      cartItem.classList.add('selected');
+    } else {
+      cartItem.classList.remove('selected');
+    }
+  }
+});
+
+// Handle 'Select All' checkbox functionality
+const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+
+selectAllCheckbox.addEventListener('change', () => {
+  const allCheckboxes = document.querySelectorAll('.item-checkbox');
+  allCheckboxes.forEach(checkbox => {
+    checkbox.checked = selectAllCheckbox.checked;
+    const cartItem = checkbox.closest('.cart-item');
+    if (selectAllCheckbox.checked) {
+      cartItem.classList.add('selected');
+    } else {
+      cartItem.classList.remove('selected');
+    }
+  });
 });
 
 // ======== CHECKOUT MODAL LOGIC ========
@@ -89,36 +122,36 @@ const checkoutSubtotal = document.getElementById('checkoutSubtotal');
 const checkoutDiscount = document.getElementById('checkoutDiscount');
 const checkoutTotal = document.getElementById('checkoutTotal');
 const checkoutVoucher = document.getElementById('checkoutVoucher');
-const checkoutProductImg = document.getElementById('checkoutProductImg');
-const checkoutProductName = document.getElementById('checkoutProductName');
-const checkoutProductPrice = document.getElementById('checkoutProductPrice');
-const checkoutQty = document.getElementById('checkoutQty');
 
 // Open checkout modal on button click
 document.querySelector('.checkout-btn').addEventListener('click', () => {
-  if (cart.length === 0) {
-    alert('Your cart is empty!');
+  const selectedItems = Array.from(document.querySelectorAll('.item-checkbox:checked'))
+    .map(checkbox => cart[checkbox.dataset.index]);
+
+  if (selectedItems.length === 0) {
+    alert('Please select items to proceed to checkout!');
     return;
   }
 
-  // Populate modal with first product for preview
-  const firstItem = cart[0];
-  checkoutProductImg.src = firstItem.image;
-  checkoutProductName.textContent = firstItem.name;
-  checkoutProductPrice.textContent = firstItem.price.toLocaleString('en-PH', { style:'currency', currency:'PHP' });
-  checkoutQty.value = firstItem.quantity;
-
-  // Populate modal with all items for summary
+  // Clear existing items in modal
   checkoutItems.innerHTML = '';
   let subtotal = 0;
 
-  cart.forEach(item => {
+  // Display selected products with images, name, price, and quantity
+  selectedItems.forEach(item => {
     const itemSubtotal = item.price * item.quantity;
     subtotal += itemSubtotal;
 
     const div = document.createElement('div');
     div.classList.add('checkout-item');
-    div.innerHTML = `<p><strong>${item.name}</strong> x ${item.quantity} - ${itemSubtotal.toLocaleString('en-PH', { style:'currency', currency:'PHP' })}</p>`;
+    div.innerHTML = `
+      <img src="${item.image}" alt="${item.name}" class="checkout-product-img">
+      <div class="product-info">
+        <p><strong>Product:</strong> ${item.name}</p>
+        <p><strong>Price:</strong> ${item.price.toLocaleString('en-PH', { style:'currency', currency:'PHP' })}</p>
+        <p><strong>Quantity:</strong> ${item.quantity}</p>
+      </div>
+    `;
     checkoutItems.appendChild(div);
   });
 
@@ -136,10 +169,47 @@ closeCheckout.addEventListener('click', () => {
 
 // Update totals when voucher changes
 checkoutVoucher.addEventListener('change', () => {
+  const selectedItems = Array.from(document.querySelectorAll('.item-checkbox:checked'))
+    .map(checkbox => cart[checkbox.dataset.index]);
+
   const discount = Number(checkoutVoucher.value);
-  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  checkoutDiscount.textContent = discount.toLocaleString('en-PH', { style:'currency', currency:'PHP' });
-  checkoutTotal.textContent = (subtotal - discount).toLocaleString('en-PH', { style:'currency', currency:'PHP' });
+  const subtotal = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  checkoutDiscount.textContent = discount.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' }).replace('₱', '');
+  checkoutTotal.textContent = (subtotal - discount).toLocaleString('en-PH', { style: 'currency', currency: 'PHP' });
+});
+
+// Handle payment method change
+const checkoutMethod = document.getElementById('checkoutMethod');
+const cardTypeContainer = document.getElementById('cardTypeContainer');
+
+checkoutMethod.addEventListener('change', () => {
+  if (checkoutMethod.value === 'card') {
+    cardTypeContainer.style.display = 'block';
+  } else {
+    cardTypeContainer.style.display = 'none';
+  }
+});
+
+// Collect phone number and card type during checkout
+const checkoutPhone = document.getElementById('checkoutPhone');
+const cardType = document.getElementById('cardType');
+
+document.getElementById('confirmCheckout').addEventListener('click', () => {
+  const phoneNumber = checkoutPhone.value.trim();
+  const selectedCardType = checkoutMethod.value === 'card' ? cardType.value : null;
+
+  if (!phoneNumber) {
+    alert('Please enter your phone number.');
+    return;
+  }
+
+  console.log('Phone Number:', phoneNumber);
+  if (selectedCardType) {
+    console.log('Card Type:', selectedCardType);
+  }
+
+  alert('Order placed successfully!');
 });
 
 // Initial render
