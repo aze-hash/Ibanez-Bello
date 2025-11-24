@@ -593,8 +593,8 @@ body {
   flex: 1;
   padding: 8px 10px;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  border: 1px solid #0f976a;
+  font-size: 13px;
 }
 .checkout-section.payment-details p {
   display: flex;
@@ -630,7 +630,7 @@ body {
 .product-info p {
   margin: 5px 0;
   font-size: 14px;
-  display: flex;
+  display: inline;
   justify-content: space-between;
 }
 

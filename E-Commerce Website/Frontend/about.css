@@ -41,6 +41,7 @@
   font-size: 38px;
   text-align: center;
   margin-bottom: 25px;
+  margin-top: auto;
   font-weight: 700;
   color: #0f976a;
   letter-spacing: -1px;
@@ -85,6 +86,7 @@
 .learn-more-content p {
   margin-top: 12px;
   font-size: 16px;
+  text-align: justify;
   color: #444;
 }
 
