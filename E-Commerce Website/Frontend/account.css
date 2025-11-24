@@ -210,6 +210,12 @@ body {
     transform: none;
     font-size: 0.75rem;
   }
+  .cart-count {
+        position: absolute;
+        top: 20px;     /* move down from the top */
+        right: 10px;   /* move more to the right */
+        font-size: 0.75rem;
+    }
 }
 
 /* ===== Modal Styles ===== */
@@ -513,6 +519,7 @@ body {
   .profile-info {
     display: none;
   }
+  
 }
 
 .modal-content-cancel {
@@ -580,7 +587,7 @@ body {
 .cart-count {
   position: absolute;
   top: 16px;
-  right: 155px;
+  right: 47px;
   background: #ff3d3d;
   color: #fff;
   font-size: 12px;

@@ -33,7 +33,7 @@ body {
 /* ========================= */
 .header {
   width: 100%;
-  background: var(--white);
+  background: var(--green);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -56,7 +56,7 @@ body {
 .logo h1 {
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--green);
+  color: var(--white);
 }
 
 .nav-list {
@@ -71,13 +71,13 @@ body {
 
 .nav-link {
   text-decoration: none;
-  color: var(--black);
+  color: var(--white);
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-  color: var(--green);
+  color: var(--black);
 }
 
 /* Hamburger */
